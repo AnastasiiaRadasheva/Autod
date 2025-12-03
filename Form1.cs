@@ -1,17 +1,40 @@
+using Autod.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Autod
 {
     public partial class Form1 : Form
     {
+        private AutoDbContext _db;
+
         public Form1()
         {
             InitializeComponent();
+            _db = new AutoDbContext();
+            LaeOmanikud();
+
+        }
+
+        private void LaeOmanikud()
+        {
+            var data = _db.Owners
+                .Select(o => new
+                {
+                    o.Id,
+                    o.FullName,
+                    o.Phone,
+                    CarCount = o.Cars.Count
+                })
+                .ToList();
+
+            dataGridViewOmanik.DataSource = data;
         }
 
         private void KustutaBTN_Click(object sender, EventArgs e)
         {
             try
             {
-                if (dataGridViewTooted.SelectedRows.Count == 0)
+                if (dataGridViewOmanik.SelectedRows.Count == 0)
                 {
                     MessageBox.Show(
                         "Palun valige kustutatav toode.",
@@ -22,7 +45,7 @@ namespace Autod
                     return;
                 }
 
-                string tooteNimetus = dataGridViewTooted.SelectedRows[0]
+                string tooteNimetus = dataGridViewOmanik.SelectedRows[0]
                     .Cells["Toodenimetus"].Value?.ToString() ?? "valitud toode";
 
                 DialogResult vastus = MessageBox.Show(
@@ -34,7 +57,7 @@ namespace Autod
                 if (vastus == DialogResult.Yes)
                 {
 
-                    int id = (int)dataGridViewTooted.SelectedRows[0].Cells["Id"].Value;
+                    int id = (int)dataGridViewOmanik.SelectedRows[0].Cells["Id"].Value;
 
                     //var toode = _db.Toodetabel.Find(id);
 
@@ -65,6 +88,41 @@ namespace Autod
         }
 
         private void lisaBTN_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nimi = textlisa.Text.Trim();
+                string telefon = texttelefon.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(nimi))
+                {
+                    MessageBox.Show("Palun sisestage omaniku nimi.");
+                    return;
+                }
+
+                var uusOmanik = new Owner
+                {
+                    FullName = nimi,
+                    Phone = telefon
+                };
+
+                _db.Owners.Add(uusOmanik);
+                _db.SaveChanges();
+
+                LaeOmanikud();
+
+                textlisa.Clear();
+                texttelefon.Clear();
+
+                MessageBox.Show("Omanik lisatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga lisamisel: " + ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

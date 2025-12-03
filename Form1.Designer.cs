@@ -30,18 +30,27 @@
         {
             Autod = new TabControl();
             tabPage1 = new TabPage();
-            dataGridView1 = new DataGridView();
+            dataGridViewOmanik = new DataGridView();
             tabPage2 = new TabPage();
             dataGridView2 = new DataGridView();
             autotable = new TabPage();
             dataGridView3 = new DataGridView();
             KustutaBTN = new Button();
             lisaBTN = new Button();
-            button1 = new Button();
+            uuendaBTN = new Button();
             comboBox1 = new ComboBox();
+            naitaBTN = new Button();
+            textlisa = new TextBox();
+            texttelefon = new TextBox();
+            textkustuta = new TextBox();
+            nimi = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            label3 = new Label();
+            textOTS = new TextBox();
             Autod.SuspendLayout();
             tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             autotable.SuspendLayout();
@@ -61,7 +70,9 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Controls.Add(textOTS);
+            tabPage1.Controls.Add(label3);
+            tabPage1.Controls.Add(dataGridViewOmanik);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -70,14 +81,14 @@
             tabPage1.Text = "Omanikud";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewOmanik
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 6);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(599, 301);
-            dataGridView1.TabIndex = 4;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridViewOmanik.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewOmanik.Location = new Point(6, 6);
+            dataGridViewOmanik.Name = "dataGridViewOmanik";
+            dataGridViewOmanik.Size = new Size(599, 301);
+            dataGridViewOmanik.TabIndex = 4;
+            dataGridViewOmanik.CellContentClick += dataGridView1_CellContentClick;
             // 
             // tabPage2
             // 
@@ -119,17 +130,17 @@
             // 
             // KustutaBTN
             // 
-            KustutaBTN.Location = new Point(39, 123);
+            KustutaBTN.Location = new Point(88, 214);
             KustutaBTN.Name = "KustutaBTN";
             KustutaBTN.Size = new Size(75, 23);
             KustutaBTN.TabIndex = 3;
-            KustutaBTN.Text = "Delete";
+            KustutaBTN.Text = "Kustuta";
             KustutaBTN.UseVisualStyleBackColor = true;
             KustutaBTN.Click += KustutaBTN_Click;
             // 
             // lisaBTN
             // 
-            lisaBTN.Location = new Point(39, 65);
+            lisaBTN.Location = new Point(88, 143);
             lisaBTN.Name = "lisaBTN";
             lisaBTN.Size = new Size(75, 23);
             lisaBTN.TabIndex = 1;
@@ -137,43 +148,126 @@
             lisaBTN.UseVisualStyleBackColor = true;
             lisaBTN.Click += lisaBTN_Click;
             // 
-            // button1
+            // uuendaBTN
             // 
-            button1.Location = new Point(39, 94);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "Update";
-            button1.UseVisualStyleBackColor = true;
+            uuendaBTN.Location = new Point(88, 185);
+            uuendaBTN.Name = "uuendaBTN";
+            uuendaBTN.Size = new Size(75, 23);
+            uuendaBTN.TabIndex = 2;
+            uuendaBTN.Text = "Uuenda";
+            uuendaBTN.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(39, 12);
+            comboBox1.Location = new Point(8, 411);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
+            comboBox1.Size = new Size(53, 23);
             comboBox1.TabIndex = 5;
+            // 
+            // naitaBTN
+            // 
+            naitaBTN.Location = new Point(88, 36);
+            naitaBTN.Name = "naitaBTN";
+            naitaBTN.Size = new Size(75, 23);
+            naitaBTN.TabIndex = 6;
+            naitaBTN.Text = "Näita kõik";
+            naitaBTN.UseVisualStyleBackColor = true;
+            naitaBTN.Click += button2_Click;
+            // 
+            // textlisa
+            // 
+            textlisa.Location = new Point(63, 85);
+            textlisa.Name = "textlisa";
+            textlisa.Size = new Size(100, 23);
+            textlisa.TabIndex = 7;
+            // 
+            // texttelefon
+            // 
+            texttelefon.Location = new Point(63, 114);
+            texttelefon.Name = "texttelefon";
+            texttelefon.Size = new Size(100, 23);
+            texttelefon.TabIndex = 8;
+            // 
+            // textkustuta
+            // 
+            textkustuta.Location = new Point(63, 320);
+            textkustuta.Name = "textkustuta";
+            textkustuta.Size = new Size(100, 23);
+            textkustuta.TabIndex = 9;
+            // 
+            // nimi
+            // 
+            nimi.AutoSize = true;
+            nimi.Location = new Point(12, 85);
+            nimi.Name = "nimi";
+            nimi.Size = new Size(36, 15);
+            nimi.TabIndex = 10;
+            nimi.Text = "Nimi:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 111);
+            label2.Name = "label2";
+            label2.Size = new Size(49, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Telefon:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(63, 376);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 12;
+            label1.Text = "label1";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(6, 336);
+            label3.Name = "label3";
+            label3.Size = new Size(95, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Otsi Nimi/Autod";
+            // 
+            // textOTS
+            // 
+            textOTS.Location = new Point(107, 333);
+            textOTS.Name = "textOTS";
+            textOTS.Size = new Size(144, 23);
+            textOTS.TabIndex = 6;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(label2);
+            Controls.Add(nimi);
+            Controls.Add(textkustuta);
+            Controls.Add(texttelefon);
+            Controls.Add(textlisa);
+            Controls.Add(naitaBTN);
             Controls.Add(comboBox1);
             Controls.Add(Autod);
             Controls.Add(lisaBTN);
             Controls.Add(KustutaBTN);
-            Controls.Add(button1);
+            Controls.Add(uuendaBTN);
             Name = "Form1";
             Text = "Autod";
             Autod.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).EndInit();
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             autotable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -182,12 +276,21 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Button lisaBTN;
-        private Button button1;
+        private Button uuendaBTN;
         private Button KustutaBTN;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewOmanik;
         private TabPage autotable;
         private DataGridView dataGridView2;
         private DataGridView dataGridView3;
         private ComboBox comboBox1;
+        private Button naitaBTN;
+        private TextBox textlisa;
+        private TextBox texttelefon;
+        private TextBox textkustuta;
+        private Label nimi;
+        private Label label2;
+        private TextBox textOTS;
+        private Label label3;
+        private Label label1;
     }
 }
