@@ -1,5 +1,9 @@
-using Autod.Data;
+﻿using Autod.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Autod
 {
@@ -9,9 +13,12 @@ namespace Autod
 
         public Form1()
         {
+
             InitializeComponent();
             _db = new AutoDbContext();
             LaeOmanikud();
+            LaeAutod();
+
 
         }
 
@@ -126,6 +133,78 @@ namespace Autod
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void texttelefon_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+        private void comboBoxAuto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LaeAutod()
+        {
+            // Загружаем автомобили с владельцами
+            var carsWithOwners = _db.Cars
+                .Include(c => c.Owner)  // Подгружаем владельцев
+                .ToList();
+
+            // Преобразуем данные в список анонимных объектов
+            var carList = carsWithOwners.Select(c => new
+            {
+                c.Id,
+                c.Brand,
+                c.Model,
+                c.RegistrationNumber,
+                OwnerName = c.Owner.FullName  // Имя владельца
+            }).ToList();
+
+            // Привязываем данные к DataGridView2
+            dataGridView2.DataSource = carList;
+        }
+
+
+
+        private void AutoVali_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(_db);
+
+            // Show the second form as a dialog (this will block interaction with Form1 until Form2 is closed)
+            if (form2.ShowDialog() == DialogResult.OK)
+            {
+                // Get the selected cars from the CheckedListBox in Form2
+                var selectedCars = form2.GetSelectedCars();
+
+
+                // Option 2: Alternatively, display selected cars in a ListBox (if you have a ListBox)
+                listBoxAuto.Items.Clear();
+                foreach (var car in selectedCars)
+                {
+                    listBoxAuto.Items.Add(car);
+                }
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void uuendaBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
