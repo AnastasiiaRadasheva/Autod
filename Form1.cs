@@ -18,13 +18,14 @@ namespace Autod
             _db = new AutoDbContext();
             LaeOmanikud();
             LaeAutod();
-
+            LaeService();
 
         }
 
         private void LaeOmanikud()
         {
             var data = _db.Owners
+                .Include(o => o.Cars) // Подгружаем машины
                 .Select(o => new
                 {
                     o.Id,
@@ -36,6 +37,7 @@ namespace Autod
 
             dataGridViewOmanik.DataSource = data;
         }
+
 
         private void KustutaBTN_Click(object sender, EventArgs e)
         {
@@ -152,11 +154,33 @@ namespace Autod
 
         }
 
+        private void LaeService()
+        {
+            // Загружаем автомобили с владельцами
+            var SERVISE = _db.Services;
+
+            // Преобразуем данные в список анонимных объектов
+            var carList = SERVISE.Select(c => new
+            {
+
+                c.Name,
+                c.Price,
+
+            }).ToList();
+
+            // Привязываем данные к DataGridView2
+            dataGridView3.DataSource = carList;
+        }
+
+
+
         private void LaeAutod()
         {
             // Загружаем автомобили с владельцами
             var carsWithOwners = _db.Cars
-                .Include(c => c.Owner)  // Подгружаем владельцев
+                .Include(c => c.Owner)
+                .Include(c => c.CarServices)
+                .ThenInclude(cs => cs.Service)// Подгружаем владельцев
                 .ToList();
 
             // Преобразуем данные в список анонимных объектов
@@ -166,7 +190,13 @@ namespace Autod
                 c.Brand,
                 c.Model,
                 c.RegistrationNumber,
-                OwnerName = c.Owner.FullName  // Имя владельца
+                OwnerName = c.Owner.FullName,  // Имя владельца
+                Services = string.Join(", ",
+    c.CarServices
+     .Where(cs => cs.Service != null)          // Только с ненулевым Service
+     .Select(cs => cs.Service.Name))
+
+
             }).ToList();
 
             // Привязываем данные к DataGridView2
@@ -177,23 +207,58 @@ namespace Autod
 
         private void AutoVali_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(_db);
-
-            // Show the second form as a dialog (this will block interaction with Form1 until Form2 is closed)
-            if (form2.ShowDialog() == DialogResult.OK)
+            if (dataGridViewOmanik.SelectedRows.Count == 0)
             {
-                // Get the selected cars from the CheckedListBox in Form2
-                var selectedCars = form2.GetSelectedCars();
+                MessageBox.Show("Palun valige omaniku, kellele lisada autod.");
+                return;
+            }
 
+            // Получаем выбранного владельца
+            int ownerId = (int)dataGridViewOmanik.SelectedRows[0].Cells["Id"].Value;
+            var owner = _db.Owners.Include(o => o.Cars).FirstOrDefault(o => o.Id == ownerId);
 
-                // Option 2: Alternatively, display selected cars in a ListBox (if you have a ListBox)
-                listBoxAuto.Items.Clear();
-                foreach (var car in selectedCars)
+            if (owner == null)
+            {
+                MessageBox.Show("Valitud omanikut ei leitud!");
+                return;
+            }
+
+            // Открываем форму выбора машин
+            using (Form2 form2 = new Form2(_db))
+            {
+                if (form2.ShowDialog() == DialogResult.OK)
                 {
-                    listBoxAuto.Items.Add(car);
+                    var selectedCarsDisplay = form2.GetSelectedCars();
+
+                    foreach (var displayText in selectedCarsDisplay)
+                    {
+                        var parts = displayText.Split('/'); // Brand/RegistrationNumber
+                        if (parts.Length == 2)
+                        {
+                            string brand = parts[0];
+                            string regNum = parts[1];
+
+                            var car = _db.Cars.FirstOrDefault(c => c.Brand == brand && c.RegistrationNumber == regNum);
+
+                            if (car != null)
+                            {
+                                car.OwnerId = ownerId; // Связываем машину с владельцем
+                            }
+                        }
+                    }
+
+                    _db.SaveChanges(); // Сохраняем изменения в базе
+
+                    // Обновляем таблицу владельцев и машин
+                    LaeOmanikud();
+                    LaeAutod();
+
+                    MessageBox.Show("Valitud autod on lisatud omanikule!");
                 }
             }
         }
+
+
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -201,6 +266,21 @@ namespace Autod
         }
 
         private void uuendaBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
