@@ -25,7 +25,7 @@ namespace Autod
         private void LaeOmanikud()
         {
             var data = _db.Owners
-                .Include(o => o.Cars) // Подгружаем машины
+                .Include(o => o.Cars)
                 .Select(o => new
                 {
                     o.Id,
@@ -156,10 +156,7 @@ namespace Autod
 
         private void LaeService()
         {
-            // Загружаем автомобили с владельцами
             var SERVISE = _db.Services;
-
-            // Преобразуем данные в список анонимных объектов
             var carList = SERVISE.Select(c => new
             {
 
@@ -167,8 +164,6 @@ namespace Autod
                 c.Price,
 
             }).ToList();
-
-            // Привязываем данные к DataGridView2
             dataGridView3.DataSource = carList;
         }
 
@@ -176,30 +171,27 @@ namespace Autod
 
         private void LaeAutod()
         {
-            // Загружаем автомобили с владельцами
             var carsWithOwners = _db.Cars
                 .Include(c => c.Owner)
                 .Include(c => c.CarServices)
-                .ThenInclude(cs => cs.Service)// Подгружаем владельцев
+                .ThenInclude(cs => cs.Service)
                 .ToList();
 
-            // Преобразуем данные в список анонимных объектов
             var carList = carsWithOwners.Select(c => new
             {
                 c.Id,
                 c.Brand,
                 c.Model,
                 c.RegistrationNumber,
-                OwnerName = c.Owner.FullName,  // Имя владельца
+                OwnerName = c.Owner.FullName,
                 Services = string.Join(", ",
     c.CarServices
-     .Where(cs => cs.Service != null)          // Только с ненулевым Service
+     .Where(cs => cs.Service != null)
      .Select(cs => cs.Service.Name))
 
 
             }).ToList();
 
-            // Привязываем данные к DataGridView2
             dataGridView2.DataSource = carList;
         }
 
@@ -213,7 +205,6 @@ namespace Autod
                 return;
             }
 
-            // Получаем выбранного владельца
             int ownerId = (int)dataGridViewOmanik.SelectedRows[0].Cells["Id"].Value;
             var owner = _db.Owners.Include(o => o.Cars).FirstOrDefault(o => o.Id == ownerId);
 
@@ -223,7 +214,7 @@ namespace Autod
                 return;
             }
 
-            // Открываем форму выбора машин
+
             using (Form2 form2 = new Form2(_db))
             {
                 if (form2.ShowDialog() == DialogResult.OK)
@@ -232,7 +223,7 @@ namespace Autod
 
                     foreach (var displayText in selectedCarsDisplay)
                     {
-                        var parts = displayText.Split('/'); // Brand/RegistrationNumber
+                        var parts = displayText.Split('/');
                         if (parts.Length == 2)
                         {
                             string brand = parts[0];
@@ -242,14 +233,13 @@ namespace Autod
 
                             if (car != null)
                             {
-                                car.OwnerId = ownerId; // Связываем машину с владельцем
+                                car.OwnerId = ownerId;
                             }
                         }
                     }
 
-                    _db.SaveChanges(); // Сохраняем изменения в базе
+                    _db.SaveChanges();
 
-                    // Обновляем таблицу владельцев и машин
                     LaeOmanikud();
                     LaeAutod();
 
@@ -281,6 +271,11 @@ namespace Autod
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

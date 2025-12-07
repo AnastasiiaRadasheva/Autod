@@ -34,7 +34,7 @@
             autotable = new TabPage();
             label5 = new Label();
             panel4 = new Panel();
-            label17 = new Label();
+            Au = new Label();
             label18 = new Label();
             lisaTEEN = new Button();
             textBox7 = new TextBox();
@@ -47,19 +47,23 @@
             textBox5 = new TextBox();
             label13 = new Label();
             label14 = new Label();
-            dataGridView1 = new DataGridView();
+            dataGridView4 = new DataGridView();
             label12 = new Label();
             dataGridView3 = new DataGridView();
             tabPage2 = new TabPage();
             panel2 = new Panel();
+            UpdateAuto = new Button();
+            label22 = new Label();
+            textBox1 = new TextBox();
+            comboBox3 = new ComboBox();
             label19 = new Label();
             comboBox2 = new ComboBox();
             label8 = new Label();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
-            button2 = new Button();
+            KustutaAuto = new Button();
             label9 = new Label();
-            button3 = new Button();
+            LisaAuto = new Button();
             label10 = new Label();
             label11 = new Label();
             dataGridView2 = new DataGridView();
@@ -74,6 +78,7 @@
             label6 = new Label();
             label7 = new Label();
             panel1 = new Panel();
+            button1 = new Button();
             textlisa = new TextBox();
             texttelefon = new TextBox();
             KustutaBTN = new Button();
@@ -84,13 +89,18 @@
             label3 = new Label();
             dataGridViewOmanik = new DataGridView();
             Autod = new TabControl();
-            comboBox3 = new ComboBox();
-            textBox1 = new TextBox();
-            label22 = new Label();
+            button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            label23 = new Label();
+            label24 = new Label();
+            comboBox4 = new ComboBox();
+            comboBox5 = new ComboBox();
             autotable.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             tabPage2.SuspendLayout();
             panel2.SuspendLayout();
@@ -139,7 +149,7 @@
             autotable.Controls.Add(panel3);
             autotable.Controls.Add(label13);
             autotable.Controls.Add(label14);
-            autotable.Controls.Add(dataGridView1);
+            autotable.Controls.Add(dataGridView4);
             autotable.Controls.Add(label12);
             autotable.Controls.Add(dataGridView3);
             autotable.Location = new Point(4, 29);
@@ -155,7 +165,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Showcard Gothic", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.LightSlateGray;
-            label5.Location = new Point(485, 246);
+            label5.Location = new Point(508, 217);
             label5.Name = "label5";
             label5.Size = new Size(151, 23);
             label5.TabIndex = 30;
@@ -164,60 +174,68 @@
             // panel4
             // 
             panel4.BackColor = Color.LightSteelBlue;
-            panel4.Controls.Add(label17);
+            panel4.Controls.Add(comboBox5);
+            panel4.Controls.Add(comboBox4);
+            panel4.Controls.Add(label24);
+            panel4.Controls.Add(label23);
+            panel4.Controls.Add(button4);
+            panel4.Controls.Add(button5);
+            panel4.Controls.Add(Au);
             panel4.Controls.Add(label18);
             panel4.Controls.Add(lisaTEEN);
             panel4.Controls.Add(textBox7);
             panel4.Controls.Add(textBox8);
-            panel4.Location = new Point(458, 276);
+            panel4.Location = new Point(445, 248);
             panel4.Name = "panel4";
-            panel4.Size = new Size(222, 159);
+            panel4.Size = new Size(283, 215);
             panel4.TabIndex = 29;
             // 
-            // label17
+            // Au
             // 
-            label17.AutoSize = true;
-            label17.Location = new Point(13, 36);
-            label17.Name = "label17";
-            label17.Size = new Size(44, 20);
-            label17.TabIndex = 30;
-            label17.Text = "Nimi:";
+            Au.AutoSize = true;
+            Au.Location = new Point(17, 16);
+            Au.Name = "Au";
+            Au.Size = new Size(44, 20);
+            Au.TabIndex = 30;
+            Au.Text = "Auto:";
             // 
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(13, 77);
+            label18.Location = new Point(14, 50);
             label18.Name = "label18";
-            label18.Size = new Size(48, 20);
+            label18.Size = new Size(72, 20);
             label18.TabIndex = 29;
-            label18.Text = "Hind: ";
+            label18.Text = "Hooldus: ";
             // 
             // lisaTEEN
             // 
-            lisaTEEN.Location = new Point(116, 120);
+            lisaTEEN.Location = new Point(180, 171);
             lisaTEEN.Name = "lisaTEEN";
-            lisaTEEN.Size = new Size(94, 29);
+            lisaTEEN.Size = new Size(79, 29);
             lisaTEEN.TabIndex = 27;
             lisaTEEN.Text = "Lisa";
             lisaTEEN.UseVisualStyleBackColor = true;
             // 
             // textBox7
             // 
-            textBox7.Location = new Point(63, 77);
+            textBox7.Location = new Point(92, 84);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(144, 27);
+            textBox7.Size = new Size(168, 27);
             textBox7.TabIndex = 26;
             // 
             // textBox8
             // 
-            textBox8.Location = new Point(63, 36);
+            textBox8.Location = new Point(92, 117);
             textBox8.Name = "textBox8";
-            textBox8.Size = new Size(144, 27);
+            textBox8.Size = new Size(168, 27);
             textBox8.TabIndex = 25;
             // 
             // panel3
             // 
             panel3.BackColor = Color.SlateGray;
+            panel3.Controls.Add(button2);
+            panel3.Controls.Add(button3);
             panel3.Controls.Add(label16);
             panel3.Controls.Add(label15);
             panel3.Controls.Add(lisaHOLD);
@@ -225,13 +243,13 @@
             panel3.Controls.Add(textBox5);
             panel3.Location = new Point(445, 47);
             panel3.Name = "panel3";
-            panel3.Size = new Size(222, 159);
+            panel3.Size = new Size(283, 157);
             panel3.TabIndex = 25;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(13, 36);
+            label16.Location = new Point(13, 16);
             label16.Name = "label16";
             label16.Size = new Size(44, 20);
             label16.TabIndex = 30;
@@ -240,7 +258,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(13, 77);
+            label15.Location = new Point(13, 56);
             label15.Name = "label15";
             label15.Size = new Size(48, 20);
             label15.TabIndex = 29;
@@ -248,35 +266,36 @@
             // 
             // lisaHOLD
             // 
-            lisaHOLD.Location = new Point(116, 120);
+            lisaHOLD.Location = new Point(181, 106);
             lisaHOLD.Name = "lisaHOLD";
-            lisaHOLD.Size = new Size(94, 29);
+            lisaHOLD.Size = new Size(89, 29);
             lisaHOLD.TabIndex = 27;
             lisaHOLD.Text = "Lisa";
             lisaHOLD.UseVisualStyleBackColor = true;
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(63, 77);
+            textBox6.Location = new Point(63, 56);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(144, 27);
+            textBox6.Size = new Size(207, 27);
             textBox6.TabIndex = 26;
             // 
             // textBox5
             // 
-            textBox5.Location = new Point(63, 36);
+            textBox5.Location = new Point(63, 16);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(144, 27);
+            textBox5.Size = new Size(207, 27);
             textBox5.TabIndex = 25;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Snap ITC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.BackColor = Color.Transparent;
+            label13.Font = new Font("Snap ITC", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label13.ForeColor = Color.LightSlateGray;
-            label13.Location = new Point(7, 235);
+            label13.Location = new Point(7, 208);
             label13.Name = "label13";
-            label13.Size = new Size(180, 39);
+            label13.Size = new Size(169, 36);
             label13.TabIndex = 22;
             label13.Text = "Teenused";
             // 
@@ -291,24 +310,25 @@
             label14.TabIndex = 28;
             label14.Text = "LISA HOOLDUS";
             // 
-            // dataGridView1
+            // dataGridView4
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(7, 278);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(360, 157);
-            dataGridView1.TabIndex = 21;
+            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView4.Location = new Point(7, 248);
+            dataGridView4.Margin = new Padding(3, 4, 3, 4);
+            dataGridView4.Name = "dataGridView4";
+            dataGridView4.RowHeadersWidth = 51;
+            dataGridView4.Size = new Size(360, 215);
+            dataGridView4.TabIndex = 21;
+            dataGridView4.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Snap ITC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Font = new Font("Snap ITC", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.LightSlateGray;
             label12.Location = new Point(7, 4);
             label12.Name = "label12";
-            label12.Size = new Size(169, 39);
+            label12.Size = new Size(158, 36);
             label12.TabIndex = 20;
             label12.Text = "Hooldus ";
             // 
@@ -342,6 +362,7 @@
             // panel2
             // 
             panel2.BackColor = Color.SlateGray;
+            panel2.Controls.Add(UpdateAuto);
             panel2.Controls.Add(label22);
             panel2.Controls.Add(textBox1);
             panel2.Controls.Add(comboBox3);
@@ -350,16 +371,52 @@
             panel2.Controls.Add(label8);
             panel2.Controls.Add(textBox3);
             panel2.Controls.Add(textBox4);
-            panel2.Controls.Add(button2);
+            panel2.Controls.Add(KustutaAuto);
             panel2.Controls.Add(label9);
-            panel2.Controls.Add(button3);
+            panel2.Controls.Add(LisaAuto);
             panel2.Controls.Add(label10);
             panel2.ForeColor = SystemColors.ActiveCaptionText;
             panel2.Location = new Point(409, 51);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(335, 305);
+            panel2.Size = new Size(335, 238);
             panel2.TabIndex = 18;
+            // 
+            // UpdateAuto
+            // 
+            UpdateAuto.BackColor = Color.LightSlateGray;
+            UpdateAuto.FlatStyle = FlatStyle.Popup;
+            UpdateAuto.Location = new Point(115, 194);
+            UpdateAuto.Name = "UpdateAuto";
+            UpdateAuto.Size = new Size(94, 29);
+            UpdateAuto.TabIndex = 20;
+            UpdateAuto.Text = "Uuenda";
+            UpdateAuto.UseVisualStyleBackColor = false;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(10, 148);
+            label22.Name = "label22";
+            label22.Size = new Size(71, 20);
+            label22.TabIndex = 19;
+            label22.Text = "Teenused";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(115, 81);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(197, 27);
+            textBox1.TabIndex = 18;
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(115, 148);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(197, 28);
+            comboBox3.TabIndex = 17;
             // 
             // label19
             // 
@@ -403,18 +460,18 @@
             textBox4.Size = new Size(197, 27);
             textBox4.TabIndex = 8;
             // 
-            // button2
+            // KustutaAuto
             // 
-            button2.BackColor = Color.Firebrick;
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(226, 270);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(86, 31);
-            button2.TabIndex = 3;
-            button2.Text = "Kustuta";
-            button2.UseVisualStyleBackColor = false;
+            KustutaAuto.BackColor = Color.Firebrick;
+            KustutaAuto.FlatStyle = FlatStyle.Popup;
+            KustutaAuto.ForeColor = Color.White;
+            KustutaAuto.Location = new Point(10, 192);
+            KustutaAuto.Margin = new Padding(3, 4, 3, 4);
+            KustutaAuto.Name = "KustutaAuto";
+            KustutaAuto.Size = new Size(86, 31);
+            KustutaAuto.TabIndex = 3;
+            KustutaAuto.Text = "Kustuta";
+            KustutaAuto.UseVisualStyleBackColor = false;
             // 
             // label9
             // 
@@ -425,18 +482,18 @@
             label9.TabIndex = 11;
             label9.Text = "Model :";
             // 
-            // button3
+            // LisaAuto
             // 
-            button3.BackColor = Color.LightSteelBlue;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.SlateGray;
-            button3.Location = new Point(226, 231);
-            button3.Margin = new Padding(3, 4, 3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(86, 31);
-            button3.TabIndex = 1;
-            button3.Text = "Lisa";
-            button3.UseVisualStyleBackColor = false;
+            LisaAuto.BackColor = Color.LightSteelBlue;
+            LisaAuto.FlatStyle = FlatStyle.Flat;
+            LisaAuto.ForeColor = Color.SlateGray;
+            LisaAuto.Location = new Point(226, 192);
+            LisaAuto.Margin = new Padding(3, 4, 3, 4);
+            LisaAuto.Name = "LisaAuto";
+            LisaAuto.Size = new Size(86, 31);
+            LisaAuto.TabIndex = 1;
+            LisaAuto.Text = "Lisa";
+            LisaAuto.UseVisualStyleBackColor = false;
             // 
             // label10
             // 
@@ -472,7 +529,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(535, 364);
+            textBox2.Location = new Point(588, 307);
             textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(145, 27);
@@ -584,6 +641,7 @@
             // panel1
             // 
             panel1.BackColor = Color.SlateGray;
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(textlisa);
             panel1.Controls.Add(texttelefon);
             panel1.Controls.Add(KustutaBTN);
@@ -596,6 +654,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(335, 119);
             panel1.TabIndex = 13;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.LightSlateGray;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Location = new Point(124, 80);
+            button1.Name = "button1";
+            button1.Size = new Size(84, 29);
+            button1.TabIndex = 21;
+            button1.Text = "Uuenda";
+            button1.UseVisualStyleBackColor = false;
             // 
             // textlisa
             // 
@@ -619,7 +688,7 @@
             KustutaBTN.BackColor = Color.Firebrick;
             KustutaBTN.FlatStyle = FlatStyle.Popup;
             KustutaBTN.ForeColor = Color.White;
-            KustutaBTN.Location = new Point(144, 78);
+            KustutaBTN.Location = new Point(21, 79);
             KustutaBTN.Margin = new Padding(3, 4, 3, 4);
             KustutaBTN.Name = "KustutaBTN";
             KustutaBTN.Size = new Size(86, 31);
@@ -643,10 +712,10 @@
             lisaBTN.BackColor = Color.LightSteelBlue;
             lisaBTN.FlatStyle = FlatStyle.Popup;
             lisaBTN.ForeColor = Color.SlateGray;
-            lisaBTN.Location = new Point(242, 78);
+            lisaBTN.Location = new Point(226, 78);
             lisaBTN.Margin = new Padding(3, 4, 3, 4);
             lisaBTN.Name = "lisaBTN";
-            lisaBTN.Size = new Size(66, 31);
+            lisaBTN.Size = new Size(82, 31);
             lisaBTN.TabIndex = 1;
             lisaBTN.Text = "Lisa";
             lisaBTN.UseVisualStyleBackColor = false;
@@ -701,30 +770,87 @@
             Autod.Size = new Size(758, 504);
             Autod.TabIndex = 0;
             // 
-            // comboBox3
+            // button2
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(115, 148);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(197, 28);
-            comboBox3.TabIndex = 17;
+            button2.BackColor = Color.LightSlateGray;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Location = new Point(92, 106);
+            button2.Name = "button2";
+            button2.Size = new Size(83, 29);
+            button2.TabIndex = 32;
+            button2.Text = "Uuenda";
+            button2.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // button3
             // 
-            textBox1.Location = new Point(115, 81);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(197, 27);
-            textBox1.TabIndex = 18;
+            button3.BackColor = Color.Firebrick;
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(13, 106);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(73, 31);
+            button3.TabIndex = 31;
+            button3.Text = "Kustuta";
+            button3.UseVisualStyleBackColor = false;
             // 
-            // label22
+            // button4
             // 
-            label22.AutoSize = true;
-            label22.Location = new Point(10, 148);
-            label22.Name = "label22";
-            label22.Size = new Size(71, 20);
-            label22.TabIndex = 19;
-            label22.Text = "Teenused";
+            button4.BackColor = Color.LightSlateGray;
+            button4.FlatStyle = FlatStyle.Popup;
+            button4.Location = new Point(94, 170);
+            button4.Name = "button4";
+            button4.Size = new Size(80, 29);
+            button4.TabIndex = 32;
+            button4.Text = "Uuenda";
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.Firebrick;
+            button5.FlatStyle = FlatStyle.Popup;
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(13, 171);
+            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Name = "button5";
+            button5.Size = new Size(72, 31);
+            button5.TabIndex = 31;
+            button5.Text = "Kustuta";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(13, 84);
+            label23.Name = "label23";
+            label23.Size = new Size(69, 20);
+            label23.TabIndex = 33;
+            label23.Text = "Kuupaev:";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(13, 117);
+            label24.Name = "label24";
+            label24.Size = new Size(69, 20);
+            label24.TabIndex = 34;
+            label24.Text = "Kirjeldus:";
+            // 
+            // comboBox4
+            // 
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(91, 16);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(168, 28);
+            comboBox4.TabIndex = 35;
+            // 
+            // comboBox5
+            // 
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Location = new Point(92, 50);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(168, 28);
+            comboBox5.TabIndex = 36;
             // 
             // Form1
             // 
@@ -745,7 +871,7 @@
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
@@ -775,9 +901,9 @@
         private Label label8;
         private TextBox textBox3;
         private TextBox textBox4;
-        private Button button2;
+        private Button KustutaAuto;
         private Label label9;
-        private Button button3;
+        private Button LisaAuto;
         private Label label10;
         private Label label11;
         private DataGridView dataGridView2;
@@ -802,11 +928,11 @@
         private Panel panel3;
         private TextBox textBox5;
         private Label label13;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView4;
         private Label label12;
         private Label label5;
         private Panel panel4;
-        private Label label17;
+        private Label Au;
         private Label label18;
         private Button lisaTEEN;
         private TextBox textBox7;
@@ -824,5 +950,15 @@
         private Label label22;
         private TextBox textBox1;
         private ComboBox comboBox3;
+        private Button UpdateAuto;
+        private Button button1;
+        private Button button4;
+        private Button button5;
+        private Button button2;
+        private Button button3;
+        private Label label24;
+        private Label label23;
+        private ComboBox comboBox5;
+        private ComboBox comboBox4;
     }
 }
