@@ -20,7 +20,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo();
 
         }
 
@@ -164,8 +164,6 @@ namespace Autod
                 .ToList();
 
             dataGridView3.DataSource = services;
-
-            // Скрываем Id, чтобы не показывать пользователю
             if (dataGridView3.Columns["Id"] != null)
                 dataGridView3.Columns["Id"].Visible = false;
         }
@@ -332,6 +330,37 @@ namespace Autod
             comboBoxOmanik.ValueMember = "Id";
         }
 
+        private void LaeAutoCombo()
+        {
+            var auto = _db.Cars
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.RegistrationNumber
+                })
+                .ToList();
+
+            teenAUTO.DataSource = auto;
+            teenAUTO.DisplayMember = "RegistrationNumber";
+            teenAUTO.ValueMember = "Id";
+        }
+        private void LaeHooldusCombo()
+        {
+            var owners = _db.Services
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.Name
+                })
+                .ToList();
+
+            teenHOOLD.DataSource = owners;
+            teenHOOLD.DisplayMember = "Name";
+            teenHOOLD.ValueMember = "Id";
+        }
+
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
@@ -345,7 +374,7 @@ namespace Autod
 
         private void valiteen_Click(object sender, EventArgs e)
         {
-           
+
         }
         private void LisaAuto_Click(object sender, EventArgs e)
         {
@@ -647,7 +676,65 @@ namespace Autod
 
         }
 
+        private void lisaTEEN_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (teenAUTO.SelectedValue == null || teenHOOLD.SelectedValue == null)
+                {
+                    MessageBox.Show("Palun vali auto ja hooldus.");
+                    return;
+                }
 
+                if (!DateTime.TryParse(teenKUUPAEV.Text, out DateTime kuup))
+                {
+                    MessageBox.Show("Palun sisesta korrektne kuupäev.");
+                    return;
+                }
+
+                if (!int.TryParse(teenKIRJ.Text, out int mileage))
+                {
+                    MessageBox.Show("Palun sisesta korrektne läbisõit.");
+                    return;
+                }
+
+                var carService = new CarService
+                {
+                    CarId = (int)teenAUTO.SelectedValue,
+                    ServiceId = (int)teenHOOLD.SelectedValue,
+                    DateOfService = kuup,
+                    Mileage = mileage
+                };
+
+                _db.CarServices.Add(carService);
+                _db.SaveChanges();
+
+                LaeCarService();
+                MessageBox.Show("Teenindus edukalt lisatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void kustTEEN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private int GetSelectedCarServiceId()
+        {
+            if (dataGridView4.CurrentRow == null)
+                throw new Exception("Palun vali teenindus tabelist.");
+
+            var obj = dataGridView4.CurrentRow.DataBoundItem;
+
+
+            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
+            return id;
+        }
 
 
 

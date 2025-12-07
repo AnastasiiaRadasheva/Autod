@@ -246,6 +246,7 @@
             kustTEEN.TabIndex = 31;
             kustTEEN.Text = "Kustuta";
             kustTEEN.UseVisualStyleBackColor = false;
+            kustTEEN.Click += kustTEEN_Click;
             // 
             // Au
             // 
@@ -273,6 +274,7 @@
             lisaTEEN.TabIndex = 27;
             lisaTEEN.Text = "Lisa";
             lisaTEEN.UseVisualStyleBackColor = true;
+            lisaTEEN.Click += lisaTEEN_Click;
             // 
             // teenKUUPAEV
             // 
