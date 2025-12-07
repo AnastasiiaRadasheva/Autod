@@ -51,8 +51,8 @@
             label16 = new Label();
             label15 = new Label();
             lisaHOLD = new Button();
-            textBox6 = new TextBox();
-            textBox5 = new TextBox();
+            hindHOLD = new TextBox();
+            NimiHOLD = new TextBox();
             label13 = new Label();
             label14 = new Label();
             dataGridView4 = new DataGridView();
@@ -239,6 +239,7 @@
             uuendTEEN.TabIndex = 32;
             uuendTEEN.Text = "Uuenda";
             uuendTEEN.UseVisualStyleBackColor = false;
+            uuendTEEN.Click += uuendTEEN_Click;
             // 
             // kustTEEN
             // 
@@ -302,8 +303,8 @@
             panel3.Controls.Add(label16);
             panel3.Controls.Add(label15);
             panel3.Controls.Add(lisaHOLD);
-            panel3.Controls.Add(textBox6);
-            panel3.Controls.Add(textBox5);
+            panel3.Controls.Add(hindHOLD);
+            panel3.Controls.Add(NimiHOLD);
             panel3.Location = new Point(445, 47);
             panel3.Name = "panel3";
             panel3.Size = new Size(283, 157);
@@ -319,6 +320,7 @@
             uuendHOLD.TabIndex = 32;
             uuendHOLD.Text = "Uuenda";
             uuendHOLD.UseVisualStyleBackColor = false;
+            uuendHOLD.Click += uuendHOLD_Click;
             // 
             // kustHOLD
             // 
@@ -332,6 +334,7 @@
             kustHOLD.TabIndex = 31;
             kustHOLD.Text = "Kustuta";
             kustHOLD.UseVisualStyleBackColor = false;
+            kustHOLD.Click += kustHOLD_Click;
             // 
             // label16
             // 
@@ -359,20 +362,21 @@
             lisaHOLD.TabIndex = 27;
             lisaHOLD.Text = "Lisa";
             lisaHOLD.UseVisualStyleBackColor = true;
+            lisaHOLD.Click += lisaHOLD_Click;
             // 
-            // textBox6
+            // hindHOLD
             // 
-            textBox6.Location = new Point(63, 56);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(207, 27);
-            textBox6.TabIndex = 26;
+            hindHOLD.Location = new Point(63, 56);
+            hindHOLD.Name = "hindHOLD";
+            hindHOLD.Size = new Size(207, 27);
+            hindHOLD.TabIndex = 26;
             // 
-            // textBox5
+            // NimiHOLD
             // 
-            textBox5.Location = new Point(63, 16);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(207, 27);
-            textBox5.TabIndex = 25;
+            NimiHOLD.Location = new Point(63, 16);
+            NimiHOLD.Name = "NimiHOLD";
+            NimiHOLD.Size = new Size(207, 27);
+            NimiHOLD.TabIndex = 25;
             // 
             // label13
             // 
@@ -428,6 +432,7 @@
             dataGridView3.RowHeadersWidth = 51;
             dataGridView3.Size = new Size(360, 157);
             dataGridView3.TabIndex = 0;
+            dataGridView3.CellClick += dataGridView3_CellClick;
             dataGridView3.CellContentClick += dataGridView3_CellContentClick;
             // 
             // tabPage2
@@ -805,6 +810,7 @@
             button1.TabIndex = 21;
             button1.Text = "Uuenda";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // textlisa
             // 
@@ -896,6 +902,7 @@
             dataGridViewOmanik.RowHeadersWidth = 51;
             dataGridViewOmanik.Size = new Size(377, 455);
             dataGridViewOmanik.TabIndex = 4;
+            dataGridViewOmanik.CellClick += dataGridViewOmanik_CellClick;
             dataGridViewOmanik.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Autod
@@ -985,7 +992,7 @@
         private DataGridView dataGridViewOmanik;
         private TabControl Autod;
         private Panel panel3;
-        private TextBox textBox5;
+        private TextBox NimiHOLD;
         private Label label13;
         private DataGridView dataGridView4;
         private Label label12;
@@ -999,7 +1006,7 @@
         private Label label16;
         private Label label15;
         private Button lisaHOLD;
-        private TextBox textBox6;
+        private TextBox hindHOLD;
         private Label label14;
         private ComboBox comboBoxOmanik;
         private Label label19;

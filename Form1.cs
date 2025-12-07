@@ -45,58 +45,54 @@ namespace Autod
         {
             try
             {
-                if (dataGridViewOmanik.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show(
-                        "Palun valige kustutatav toode.",
-                        "Viga",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                int id = GetSelectedOwnerId();
 
+                var owner = _db.Owners
+                    .Include(o => o.Cars)
+                    .FirstOrDefault(o => o.Id == id);
+
+                if (owner == null)
+                {
+                    MessageBox.Show("Omanikku ei leitud.");
                     return;
                 }
 
-                string tooteNimetus = dataGridViewOmanik.SelectedRows[0]
-                    .Cells["Toodenimetus"].Value?.ToString() ?? "valitud toode";
-
-                DialogResult vastus = MessageBox.Show(
-                    $"Kas olete kindel, et soovite kustutada toote: {tooteNimetus}?",
-                    "Kustutamise kinnitus",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (vastus == DialogResult.Yes)
+                if (owner.Cars != null && owner.Cars.Any())
                 {
-
-                    int id = (int)dataGridViewOmanik.SelectedRows[0].Cells["Id"].Value;
-
-                    //var toode = _db.Toodetabel.Find(id);
-
-                    //if (toode != null)
-                    //{
-                    //    _db.Toodetabel.Remove(toode);
-                    //    _db.SaveChanges();
-
-                    //    LaeTooted();
-                    //    PuhastaVorm();  
-                    //}
+                    _db.Cars.RemoveRange(owner.Cars);
                 }
+                _db.Owners.Remove(owner);
+                _db.SaveChanges();
+                LaeOmanikud();
+                MessageBox.Show("Omanik kustutatud!");
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Viga kustutamisel: " + ex.Message,
-                    "Viga",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message);
             }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+        private int GetSelectedOwnerId()
+        {
+            if (dataGridViewOmanik.CurrentRow == null)
+                throw new Exception("Palun vali omanik tabelist.");
+
+            var obj = dataGridViewOmanik.CurrentRow.DataBoundItem;
+
+            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
+
+            return id;
+        }
+
 
         private void lisaBTN_Click(object sender, EventArgs e)
         {
@@ -158,15 +154,30 @@ namespace Autod
 
         private void LaeService()
         {
-            var SERVISE = _db.Services;
-            var carList = SERVISE.Select(c => new
-            {
+            var services = _db.Services
+                .Select(s => new
+                {
+                    s.Id,
+                    s.Name,
+                    s.Price
+                })
+                .ToList();
 
-                c.Name,
-                c.Price,
+            dataGridView3.DataSource = services;
 
-            }).ToList();
-            dataGridView3.DataSource = carList;
+            // Скрываем Id, чтобы не показывать пользователю
+            if (dataGridView3.Columns["Id"] != null)
+                dataGridView3.Columns["Id"].Visible = false;
+        }
+
+        private int GetSelectedServiceId()
+        {
+            if (dataGridView3.CurrentRow == null)
+                throw new Exception("Palun vali hooldus tabelist.");
+            var obj = dataGridView3.CurrentRow.DataBoundItem;
+            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
+
+            return id;
         }
 
 
@@ -174,8 +185,8 @@ namespace Autod
         private void LaeCarService()
         {
             var carServices = _db.CarServices
-                .Include(cs => cs.Car)       // Загружаем машину
-                .Include(cs => cs.Service)   // Загружаем услугу
+                .Include(cs => cs.Car)
+                .Include(cs => cs.Service)
                 .ToList();
 
             var list = carServices.Select(cs => new
@@ -288,7 +299,7 @@ namespace Autod
 
         private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -346,7 +357,7 @@ namespace Autod
             {
                 if (form3.ShowDialog() == DialogResult.OK)
                 {
-                    var selectedServiceIds = form3.GetSelectedServices(); // Список Id выбранных услуг
+                    var selectedServiceIds = form3.GetSelectedServices();
 
                     foreach (var serviceId in selectedServiceIds)
                     {
@@ -408,10 +419,8 @@ namespace Autod
                 return;
             }
 
-            // Võtame valitud auto ID
             int id = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
 
-            // Otsime andmebaasist
             var car = _db.Cars.FirstOrDefault(c => c.Id == id);
 
             if (car == null)
@@ -419,8 +428,6 @@ namespace Autod
                 MessageBox.Show("Autot ei leitud.");
                 return;
             }
-
-            // Kontrollime väljad
             if (string.IsNullOrWhiteSpace(textBoxMARK.Text) ||
                 string.IsNullOrWhiteSpace(textBoxMODEL.Text) ||
                 string.IsNullOrWhiteSpace(textBoxRegNum.Text))
@@ -435,7 +442,6 @@ namespace Autod
                 return;
             }
 
-            // Uuendame väärtused
             car.Brand = textBoxMARK.Text;
             car.Model = textBoxMODEL.Text;
             car.RegistrationNumber = textBoxRegNum.Text;
@@ -446,6 +452,11 @@ namespace Autod
             LaeAutod();
 
             MessageBox.Show("Auto edukalt uuendatud!");
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
         }
 
         private void KustutaAuto_Click(object sender, EventArgs e)
@@ -459,7 +470,7 @@ namespace Autod
             int id = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
 
             var car = _db.Cars
-                .Include(c => c.CarServices)  // kui autol on teenused, peame need eemaldama
+                .Include(c => c.CarServices)
                 .FirstOrDefault(c => c.Id == id);
 
             if (car == null)
@@ -467,8 +478,6 @@ namespace Autod
                 MessageBox.Show("Autot ei leitud.");
                 return;
             }
-
-            // Kui autol on teenused – kustutame need esmalt
             if (car.CarServices != null && car.CarServices.Any())
             {
                 _db.CarServices.RemoveRange(car.CarServices);
@@ -480,11 +489,16 @@ namespace Autod
             LaeAutod();
 
             MessageBox.Show("Auto kustutatud!");
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; 
+            if (e.RowIndex < 0) return;
 
             DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
 
@@ -495,6 +509,174 @@ namespace Autod
 
             comboBoxOmanik.Text = row.Cells["OwnerName"].Value?.ToString();
         }
+
+        private void lisaHOLD_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(NimiHOLD.Text))
+            {
+                MessageBox.Show("Palun sisesta hoolduse nimi.");
+                return;
+            }
+            if (!float.TryParse(hindHOLD.Text, out float price))
+            {
+                MessageBox.Show("Palun sisesta korrektne hind (number).");
+                return;
+            }
+
+            var service = new Service
+            {
+                Name = NimiHOLD.Text,
+                Price = price
+            };
+
+            _db.Services.Add(service);
+            _db.SaveChanges();
+            LaeService();
+
+            MessageBox.Show("Hooldus edukalt lisatud!");
+        }
+
+        private void uuendHOLD_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = GetSelectedServiceId();
+
+                var service = _db.Services.FirstOrDefault(s => s.Id == id);
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(NimiHOLD.Text))
+                {
+                    MessageBox.Show("Palun sisesta hoolduse nimi.");
+                    return;
+                }
+
+                if (!float.TryParse(hindHOLD.Text, out float hind))
+                {
+                    MessageBox.Show("Hind peab olema number.");
+                    return;
+                }
+                service.Name = NimiHOLD.Text;
+                service.Price = hind;
+
+                _db.SaveChanges();
+                LaeService();
+                MessageBox.Show("Hooldus edukalt uuendatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
+        }
+
+
+        private void kustHOLD_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = GetSelectedServiceId();
+
+                var service = _db.Services
+                    .Include(s => s.CarServices)
+                    .FirstOrDefault(s => s.Id == id);
+
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                if (service.CarServices != null && service.CarServices.Any())
+                {
+                    _db.CarServices.RemoveRange(service.CarServices);
+                }
+
+                _db.Services.Remove(service);
+                _db.SaveChanges();
+                LaeService();
+                MessageBox.Show("Hooldus kustutatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
+        }
+
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dataGridView3.Rows[e.RowIndex];
+
+            NimiHOLD.Text = row.Cells["Name"].Value?.ToString();
+            hindHOLD.Text = row.Cells["Price"].Value?.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = GetSelectedOwnerId();
+
+                var owner = _db.Owners.FirstOrDefault(o => o.Id == id);
+                if (owner == null)
+                {
+                    MessageBox.Show("Omanikku ei leitud.");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(textlisa.Text) || string.IsNullOrWhiteSpace(texttelefon.Text))
+                {
+                    MessageBox.Show("Palun täida kõik väljad.");
+                    return;
+                }
+
+                owner.FullName = textlisa.Text;
+                owner.Phone = texttelefon.Text;
+
+                _db.SaveChanges();
+                LaeOmanikud();
+                MessageBox.Show("Omanik uuendatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
+        }
+
+        private void dataGridViewOmanik_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dataGridViewOmanik.Rows[e.RowIndex];
+            textlisa.Text = row.Cells["FullName"].Value?.ToString();
+            texttelefon.Text = row.Cells["Phone"].Value?.ToString();
+        }
+
+        private void uuendTEEN_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
