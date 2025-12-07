@@ -34,12 +34,20 @@
             autotable = new TabPage();
             label5 = new Label();
             panel4 = new Panel();
+            comboBox5 = new ComboBox();
+            comboBox4 = new ComboBox();
+            label24 = new Label();
+            label23 = new Label();
+            button4 = new Button();
+            button5 = new Button();
             Au = new Label();
             label18 = new Label();
             lisaTEEN = new Button();
             textBox7 = new TextBox();
             textBox8 = new TextBox();
             panel3 = new Panel();
+            button2 = new Button();
+            button3 = new Button();
             label16 = new Label();
             label15 = new Label();
             lisaHOLD = new Button();
@@ -51,16 +59,16 @@
             label12 = new Label();
             dataGridView3 = new DataGridView();
             tabPage2 = new TabPage();
+            label25 = new Label();
+            label26 = new Label();
             panel2 = new Panel();
             UpdateAuto = new Button();
-            label22 = new Label();
-            textBox1 = new TextBox();
-            comboBox3 = new ComboBox();
+            textBoxRegNum = new TextBox();
             label19 = new Label();
-            comboBox2 = new ComboBox();
+            comboBoxOmanik = new ComboBox();
             label8 = new Label();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            textBoxMARK = new TextBox();
+            textBoxMODEL = new TextBox();
             KustutaAuto = new Button();
             label9 = new Label();
             LisaAuto = new Button();
@@ -89,14 +97,10 @@
             label3 = new Label();
             dataGridViewOmanik = new DataGridView();
             Autod = new TabControl();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            label23 = new Label();
-            label24 = new Label();
-            comboBox4 = new ComboBox();
-            comboBox5 = new ComboBox();
+            label17 = new Label();
+            listBoxteen = new ListBox();
+            valiteen = new Button();
+            panel6 = new Panel();
             autotable.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -110,6 +114,7 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).BeginInit();
             Autod.SuspendLayout();
+            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // comboBox1
@@ -190,6 +195,64 @@
             panel4.Size = new Size(283, 215);
             panel4.TabIndex = 29;
             // 
+            // comboBox5
+            // 
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Location = new Point(92, 50);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(168, 28);
+            comboBox5.TabIndex = 36;
+            // 
+            // comboBox4
+            // 
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(91, 16);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(168, 28);
+            comboBox4.TabIndex = 35;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(13, 117);
+            label24.Name = "label24";
+            label24.Size = new Size(69, 20);
+            label24.TabIndex = 34;
+            label24.Text = "Kirjeldus:";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(13, 84);
+            label23.Name = "label23";
+            label23.Size = new Size(69, 20);
+            label23.TabIndex = 33;
+            label23.Text = "Kuupaev:";
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.LightSlateGray;
+            button4.FlatStyle = FlatStyle.Popup;
+            button4.Location = new Point(94, 170);
+            button4.Name = "button4";
+            button4.Size = new Size(80, 29);
+            button4.TabIndex = 32;
+            button4.Text = "Uuenda";
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.Firebrick;
+            button5.FlatStyle = FlatStyle.Popup;
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(13, 171);
+            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Name = "button5";
+            button5.Size = new Size(72, 31);
+            button5.TabIndex = 31;
+            button5.Text = "Kustuta";
+            button5.UseVisualStyleBackColor = false;
+            // 
             // Au
             // 
             Au.AutoSize = true;
@@ -245,6 +308,30 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(283, 157);
             panel3.TabIndex = 25;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.LightSlateGray;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Location = new Point(92, 106);
+            button2.Name = "button2";
+            button2.Size = new Size(83, 29);
+            button2.TabIndex = 32;
+            button2.Text = "Uuenda";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.Firebrick;
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(13, 106);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(73, 31);
+            button3.TabIndex = 31;
+            button3.Text = "Kustuta";
+            button3.UseVisualStyleBackColor = false;
             // 
             // label16
             // 
@@ -346,6 +433,9 @@
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.GradientInactiveCaption;
+            tabPage2.Controls.Add(panel6);
+            tabPage2.Controls.Add(label25);
+            tabPage2.Controls.Add(label26);
             tabPage2.Controls.Add(panel2);
             tabPage2.Controls.Add(label11);
             tabPage2.Controls.Add(dataGridView2);
@@ -359,18 +449,38 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Autod";
             // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.BackColor = Color.Transparent;
+            label25.ForeColor = Color.LightSlateGray;
+            label25.Location = new Point(484, 287);
+            label25.Name = "label25";
+            label25.Size = new Size(185, 20);
+            label25.TabIndex = 22;
+            label25.Text = "*Auto tuleb valida tabelist.";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Font = new Font("Showcard Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label26.ForeColor = Color.LightSlateGray;
+            label26.Location = new Point(502, 261);
+            label26.Name = "label26";
+            label26.Size = new Size(167, 26);
+            label26.TabIndex = 21;
+            label26.Text = "Lisa teenused";
+            // 
             // panel2
             // 
             panel2.BackColor = Color.SlateGray;
             panel2.Controls.Add(UpdateAuto);
-            panel2.Controls.Add(label22);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(comboBox3);
+            panel2.Controls.Add(textBoxRegNum);
             panel2.Controls.Add(label19);
-            panel2.Controls.Add(comboBox2);
+            panel2.Controls.Add(comboBoxOmanik);
             panel2.Controls.Add(label8);
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(textBox4);
+            panel2.Controls.Add(textBoxMARK);
+            panel2.Controls.Add(textBoxMODEL);
             panel2.Controls.Add(KustutaAuto);
             panel2.Controls.Add(label9);
             panel2.Controls.Add(LisaAuto);
@@ -379,44 +489,27 @@
             panel2.Location = new Point(409, 51);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(335, 238);
+            panel2.Size = new Size(335, 202);
             panel2.TabIndex = 18;
             // 
             // UpdateAuto
             // 
             UpdateAuto.BackColor = Color.LightSlateGray;
             UpdateAuto.FlatStyle = FlatStyle.Popup;
-            UpdateAuto.Location = new Point(115, 194);
+            UpdateAuto.Location = new Point(115, 159);
             UpdateAuto.Name = "UpdateAuto";
             UpdateAuto.Size = new Size(94, 29);
             UpdateAuto.TabIndex = 20;
             UpdateAuto.Text = "Uuenda";
             UpdateAuto.UseVisualStyleBackColor = false;
             // 
-            // label22
+            // textBoxRegNum
             // 
-            label22.AutoSize = true;
-            label22.Location = new Point(10, 148);
-            label22.Name = "label22";
-            label22.Size = new Size(71, 20);
-            label22.TabIndex = 19;
-            label22.Text = "Teenused";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(115, 81);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(197, 27);
-            textBox1.TabIndex = 18;
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(115, 148);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(197, 28);
-            comboBox3.TabIndex = 17;
+            textBoxRegNum.Location = new Point(115, 81);
+            textBoxRegNum.Margin = new Padding(3, 4, 3, 4);
+            textBoxRegNum.Name = "textBoxRegNum";
+            textBoxRegNum.Size = new Size(197, 27);
+            textBoxRegNum.TabIndex = 18;
             // 
             // label19
             // 
@@ -427,13 +520,14 @@
             label19.TabIndex = 16;
             label19.Text = "Omanik";
             // 
-            // comboBox2
+            // comboBoxOmanik
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(115, 114);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(197, 28);
-            comboBox2.TabIndex = 15;
+            comboBoxOmanik.FormattingEnabled = true;
+            comboBoxOmanik.Location = new Point(115, 114);
+            comboBoxOmanik.Name = "comboBoxOmanik";
+            comboBoxOmanik.Size = new Size(197, 28);
+            comboBoxOmanik.TabIndex = 15;
+            comboBoxOmanik.SelectedIndexChanged += comboBoxOmanik_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -444,28 +538,28 @@
             label8.TabIndex = 12;
             label8.Text = "Registr.Num. :";
             // 
-            // textBox3
+            // textBoxMARK
             // 
-            textBox3.Location = new Point(115, 11);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(197, 27);
-            textBox3.TabIndex = 7;
+            textBoxMARK.Location = new Point(115, 11);
+            textBoxMARK.Margin = new Padding(3, 4, 3, 4);
+            textBoxMARK.Name = "textBoxMARK";
+            textBoxMARK.Size = new Size(197, 27);
+            textBoxMARK.TabIndex = 7;
             // 
-            // textBox4
+            // textBoxMODEL
             // 
-            textBox4.Location = new Point(115, 46);
-            textBox4.Margin = new Padding(3, 4, 3, 4);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(197, 27);
-            textBox4.TabIndex = 8;
+            textBoxMODEL.Location = new Point(115, 46);
+            textBoxMODEL.Margin = new Padding(3, 4, 3, 4);
+            textBoxMODEL.Name = "textBoxMODEL";
+            textBoxMODEL.Size = new Size(197, 27);
+            textBoxMODEL.TabIndex = 8;
             // 
             // KustutaAuto
             // 
             KustutaAuto.BackColor = Color.Firebrick;
             KustutaAuto.FlatStyle = FlatStyle.Popup;
             KustutaAuto.ForeColor = Color.White;
-            KustutaAuto.Location = new Point(10, 192);
+            KustutaAuto.Location = new Point(10, 157);
             KustutaAuto.Margin = new Padding(3, 4, 3, 4);
             KustutaAuto.Name = "KustutaAuto";
             KustutaAuto.Size = new Size(86, 31);
@@ -487,7 +581,7 @@
             LisaAuto.BackColor = Color.LightSteelBlue;
             LisaAuto.FlatStyle = FlatStyle.Flat;
             LisaAuto.ForeColor = Color.SlateGray;
-            LisaAuto.Location = new Point(226, 192);
+            LisaAuto.Location = new Point(226, 159);
             LisaAuto.Margin = new Padding(3, 4, 3, 4);
             LisaAuto.Name = "LisaAuto";
             LisaAuto.Size = new Size(86, 31);
@@ -529,20 +623,21 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(588, 307);
+            textBox2.Location = new Point(599, 436);
             textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(145, 27);
             textBox2.TabIndex = 2;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(445, 380);
+            label4.Location = new Point(519, 439);
             label4.Name = "label4";
-            label4.Size = new Size(33, 20);
+            label4.Size = new Size(74, 20);
             label4.TabIndex = 1;
-            label4.Text = "otsi";
+            label4.Text = "Otsi Auto:";
             label4.Click += label4_Click;
             // 
             // tabPage1
@@ -732,7 +827,7 @@
             // 
             // textOTS
             // 
-            textOTS.Location = new Point(553, 421);
+            textOTS.Location = new Point(580, 428);
             textOTS.Margin = new Padding(3, 4, 3, 4);
             textOTS.Name = "textOTS";
             textOTS.Size = new Size(164, 27);
@@ -741,7 +836,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(409, 428);
+            label3.Location = new Point(456, 428);
             label3.Name = "label3";
             label3.Size = new Size(118, 20);
             label3.TabIndex = 5;
@@ -770,87 +865,46 @@
             Autod.Size = new Size(758, 504);
             Autod.TabIndex = 0;
             // 
-            // button2
+            // label17
             // 
-            button2.BackColor = Color.LightSlateGray;
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.Location = new Point(92, 106);
-            button2.Name = "button2";
-            button2.Size = new Size(83, 29);
-            button2.TabIndex = 32;
-            button2.Text = "Uuenda";
-            button2.UseVisualStyleBackColor = false;
+            label17.AutoSize = true;
+            label17.Location = new Point(13, 14);
+            label17.Name = "label17";
+            label17.Size = new Size(78, 20);
+            label17.TabIndex = 12;
+            label17.Text = "Teenused :";
             // 
-            // button3
+            // listBoxteen
             // 
-            button3.BackColor = Color.Firebrick;
-            button3.FlatStyle = FlatStyle.Popup;
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(13, 106);
-            button3.Margin = new Padding(3, 4, 3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(73, 31);
-            button3.TabIndex = 31;
-            button3.Text = "Kustuta";
-            button3.UseVisualStyleBackColor = false;
+            listBoxteen.FormattingEnabled = true;
+            listBoxteen.Location = new Point(111, 14);
+            listBoxteen.Margin = new Padding(3, 4, 3, 4);
+            listBoxteen.Name = "listBoxteen";
+            listBoxteen.Size = new Size(197, 64);
+            listBoxteen.TabIndex = 14;
+            listBoxteen.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
-            // button4
+            // valiteen
             // 
-            button4.BackColor = Color.LightSlateGray;
-            button4.FlatStyle = FlatStyle.Popup;
-            button4.Location = new Point(94, 170);
-            button4.Name = "button4";
-            button4.Size = new Size(80, 29);
-            button4.TabIndex = 32;
-            button4.Text = "Uuenda";
-            button4.UseVisualStyleBackColor = false;
+            valiteen.Location = new Point(13, 38);
+            valiteen.Margin = new Padding(3, 4, 3, 4);
+            valiteen.Name = "valiteen";
+            valiteen.Size = new Size(75, 31);
+            valiteen.TabIndex = 13;
+            valiteen.Text = "Vali Lisa";
+            valiteen.UseVisualStyleBackColor = true;
+            valiteen.Click += valiteen_Click;
             // 
-            // button5
+            // panel6
             // 
-            button5.BackColor = Color.Firebrick;
-            button5.FlatStyle = FlatStyle.Popup;
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(13, 171);
-            button5.Margin = new Padding(3, 4, 3, 4);
-            button5.Name = "button5";
-            button5.Size = new Size(72, 31);
-            button5.TabIndex = 31;
-            button5.Text = "Kustuta";
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(13, 84);
-            label23.Name = "label23";
-            label23.Size = new Size(69, 20);
-            label23.TabIndex = 33;
-            label23.Text = "Kuupaev:";
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(13, 117);
-            label24.Name = "label24";
-            label24.Size = new Size(69, 20);
-            label24.TabIndex = 34;
-            label24.Text = "Kirjeldus:";
-            // 
-            // comboBox4
-            // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(91, 16);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(168, 28);
-            comboBox4.TabIndex = 35;
-            // 
-            // comboBox5
-            // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(92, 50);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(168, 28);
-            comboBox5.TabIndex = 36;
+            panel6.BackColor = Color.LightSteelBlue;
+            panel6.Controls.Add(valiteen);
+            panel6.Controls.Add(listBoxteen);
+            panel6.Controls.Add(label17);
+            panel6.Location = new Point(413, 310);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(331, 109);
+            panel6.TabIndex = 20;
             // 
             // Form1
             // 
@@ -886,6 +940,8 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).EndInit();
             Autod.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -899,8 +955,8 @@
         private TabPage tabPage2;
         private Panel panel2;
         private Label label8;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox textBoxMARK;
+        private TextBox textBoxMODEL;
         private Button KustutaAuto;
         private Label label9;
         private Button LisaAuto;
@@ -912,7 +968,6 @@
         private TabPage tabPage1;
         private Label label7;
         private Panel panel1;
-        private ListBox listBoxAuto;
         private Button AutoVali;
         private Label label6;
         private TextBox textlisa;
@@ -942,14 +997,12 @@
         private Button lisaHOLD;
         private TextBox textBox6;
         private Label label14;
-        private ComboBox comboBox2;
+        private ComboBox comboBoxOmanik;
         private Label label19;
         private Panel panel5;
         private Label label21;
         private Label label20;
-        private Label label22;
-        private TextBox textBox1;
-        private ComboBox comboBox3;
+        private TextBox textBoxRegNum;
         private Button UpdateAuto;
         private Button button1;
         private Button button4;
@@ -960,5 +1013,12 @@
         private Label label23;
         private ComboBox comboBox5;
         private ComboBox comboBox4;
+        private Label label25;
+        private Label label26;
+        private ListBox listBoxAuto;
+        private Panel panel6;
+        private Button valiteen;
+        private ListBox listBoxteen;
+        private Label label17;
     }
 }

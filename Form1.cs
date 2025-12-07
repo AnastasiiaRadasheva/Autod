@@ -19,6 +19,8 @@ namespace Autod
             LaeOmanikud();
             LaeAutod();
             LaeService();
+            LaeCarService();
+            LaeOmanikudCombo();
 
         }
 
@@ -169,31 +171,50 @@ namespace Autod
 
 
 
+        private void LaeCarService()
+        {
+            var carServices = _db.CarServices
+                .Include(cs => cs.Car)       // Загружаем машину
+                .Include(cs => cs.Service)   // Загружаем услугу
+                .ToList();
+
+            var list = carServices.Select(cs => new
+            {
+                Auto = $"{cs.Car.Brand} {cs.Car.Model} ({cs.Car.RegistrationNumber})",
+                Service = cs.Service.Name,
+                Price = cs.Service.Price,
+                Date = cs.DateOfService.ToShortDateString(),
+                Mileage = cs.Mileage
+            }).ToList();
+
+            dataGridView4.DataSource = list;
+        }
+
+
         private void LaeAutod()
         {
-            var carsWithOwners = _db.Cars
+            var cars = _db.Cars
                 .Include(c => c.Owner)
                 .Include(c => c.CarServices)
                 .ThenInclude(cs => cs.Service)
                 .ToList();
 
-            var carList = carsWithOwners.Select(c => new
+            var carList = cars.Select(c => new
             {
                 c.Id,
                 c.Brand,
                 c.Model,
                 c.RegistrationNumber,
                 OwnerName = c.Owner.FullName,
-                Services = string.Join(", ",
-    c.CarServices
-     .Where(cs => cs.Service != null)
-     .Select(cs => cs.Service.Name))
 
-
-            }).ToList();
+                Services = c.CarServices?.Count ?? 0
+  
+            })
+            .ToList();
 
             dataGridView2.DataSource = carList;
         }
+
 
 
 
@@ -279,6 +300,75 @@ namespace Autod
         {
 
         }
+
+        private void comboBoxOmanik_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void LaeOmanikudCombo()
+        {
+            var owners = _db.Owners
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.FullName
+                })
+                .ToList();
+
+            comboBoxOmanik.DataSource = owners;
+            comboBoxOmanik.DisplayMember = "FullName";
+            comboBoxOmanik.ValueMember = "Id";
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private Dictionary<int, int> _carServiceTemp = new Dictionary<int, int>();
+
+        private void valiteen_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Palun valige auto.");
+                return;
+            }
+
+            int carId = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
+
+            using (Form3 form3 = new Form3(_db))
+            {
+                if (form3.ShowDialog() == DialogResult.OK)
+                {
+                    var selectedServiceIds = form3.GetSelectedServices(); // Список Id выбранных услуг
+
+                    foreach (var serviceId in selectedServiceIds)
+                    {
+                        var carService = new CarService
+                        {
+                            CarId = carId,
+                            ServiceId = serviceId,
+                            DateOfService = DateTime.Now,
+                            Mileage = 0
+                        };
+                        _db.CarServices.Add(carService);
+                    }
+
+                    _db.SaveChanges(); // Сохраняем в базу
+
+                    LaeAutod(); // Обновляем DataGridView
+                }
+            }
+        }
+
+
+
 
 
 

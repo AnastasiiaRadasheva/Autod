@@ -37,25 +37,27 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Colonna MT", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(94, 9);
+            label1.Location = new Point(93, 13);
             label1.Name = "label1";
-            label1.Size = new Size(159, 22);
+            label1.Size = new Size(202, 28);
             label1.TabIndex = 0;
             label1.Text = "Vali teie autod!";
             // 
             // checkedListBoxAutod
             // 
             checkedListBoxAutod.FormattingEnabled = true;
-            checkedListBoxAutod.Location = new Point(21, 34);
+            checkedListBoxAutod.Location = new Point(24, 45);
+            checkedListBoxAutod.Margin = new Padding(3, 4, 3, 4);
             checkedListBoxAutod.Name = "checkedListBoxAutod";
-            checkedListBoxAutod.Size = new Size(295, 364);
+            checkedListBoxAutod.Size = new Size(337, 488);
             checkedListBoxAutod.TabIndex = 1;
             // 
             // koikBTN
             // 
-            koikBTN.Location = new Point(241, 419);
+            koikBTN.Location = new Point(275, 559);
+            koikBTN.Margin = new Padding(3, 4, 3, 4);
             koikBTN.Name = "koikBTN";
-            koikBTN.Size = new Size(75, 23);
+            koikBTN.Size = new Size(86, 31);
             koikBTN.TabIndex = 2;
             koikBTN.Text = "Kõik";
             koikBTN.UseVisualStyleBackColor = true;
@@ -63,12 +65,13 @@
             // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(339, 454);
+            ClientSize = new Size(387, 605);
             Controls.Add(koikBTN);
             Controls.Add(checkedListBoxAutod);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
             Text = "Form2";
             ResumeLayout(false);
