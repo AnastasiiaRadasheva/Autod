@@ -345,37 +345,7 @@ namespace Autod
 
         private void valiteen_Click(object sender, EventArgs e)
         {
-            if (dataGridView2.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Palun valige auto.");
-                return;
-            }
-
-            int carId = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
-
-            using (Form3 form3 = new Form3(_db))
-            {
-                if (form3.ShowDialog() == DialogResult.OK)
-                {
-                    var selectedServiceIds = form3.GetSelectedServices();
-
-                    foreach (var serviceId in selectedServiceIds)
-                    {
-                        var carService = new CarService
-                        {
-                            CarId = carId,
-                            ServiceId = serviceId,
-                            DateOfService = DateTime.Now,
-                            Mileage = 0
-                        };
-                        _db.CarServices.Add(carService);
-                    }
-
-                    _db.SaveChanges(); // Сохраняем в базу
-
-                    LaeAutod();
-                }
-            }
+           
         }
         private void LisaAuto_Click(object sender, EventArgs e)
         {

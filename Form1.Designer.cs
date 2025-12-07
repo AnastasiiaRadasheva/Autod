@@ -59,12 +59,6 @@
             label12 = new Label();
             dataGridView3 = new DataGridView();
             tabPage2 = new TabPage();
-            panel6 = new Panel();
-            valiteen = new Button();
-            listBoxteen = new ListBox();
-            label17 = new Label();
-            label25 = new Label();
-            label26 = new Label();
             panel2 = new Panel();
             UpdateAuto = new Button();
             textBoxRegNum = new TextBox();
@@ -107,7 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             tabPage2.SuspendLayout();
-            panel6.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             tabPage1.SuspendLayout();
@@ -438,9 +431,6 @@
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.GradientInactiveCaption;
-            tabPage2.Controls.Add(panel6);
-            tabPage2.Controls.Add(label25);
-            tabPage2.Controls.Add(label26);
             tabPage2.Controls.Add(panel2);
             tabPage2.Controls.Add(label11);
             tabPage2.Controls.Add(dataGridView2);
@@ -453,69 +443,6 @@
             tabPage2.Size = new Size(750, 471);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Autod";
-            // 
-            // panel6
-            // 
-            panel6.BackColor = Color.LightSteelBlue;
-            panel6.Controls.Add(valiteen);
-            panel6.Controls.Add(listBoxteen);
-            panel6.Controls.Add(label17);
-            panel6.Location = new Point(413, 310);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(331, 109);
-            panel6.TabIndex = 20;
-            // 
-            // valiteen
-            // 
-            valiteen.Location = new Point(13, 38);
-            valiteen.Margin = new Padding(3, 4, 3, 4);
-            valiteen.Name = "valiteen";
-            valiteen.Size = new Size(75, 31);
-            valiteen.TabIndex = 13;
-            valiteen.Text = "Vali Lisa";
-            valiteen.UseVisualStyleBackColor = true;
-            valiteen.Click += valiteen_Click;
-            // 
-            // listBoxteen
-            // 
-            listBoxteen.FormattingEnabled = true;
-            listBoxteen.Location = new Point(111, 14);
-            listBoxteen.Margin = new Padding(3, 4, 3, 4);
-            listBoxteen.Name = "listBoxteen";
-            listBoxteen.Size = new Size(197, 64);
-            listBoxteen.TabIndex = 14;
-            listBoxteen.SelectedIndexChanged += listBox1_SelectedIndexChanged;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(13, 14);
-            label17.Name = "label17";
-            label17.Size = new Size(78, 20);
-            label17.TabIndex = 12;
-            label17.Text = "Teenused :";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.BackColor = Color.Transparent;
-            label25.ForeColor = Color.LightSlateGray;
-            label25.Location = new Point(484, 287);
-            label25.Name = "label25";
-            label25.Size = new Size(185, 20);
-            label25.TabIndex = 22;
-            label25.Text = "*Auto tuleb valida tabelist.";
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Font = new Font("Showcard Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label26.ForeColor = Color.LightSlateGray;
-            label26.Location = new Point(502, 261);
-            label26.Name = "label26";
-            label26.Size = new Size(167, 26);
-            label26.TabIndex = 21;
-            label26.Text = "Lisa teenused";
             // 
             // panel2
             // 
@@ -940,8 +867,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
@@ -1024,12 +949,6 @@
         private Label label23;
         private ComboBox teenHOOLD;
         private ComboBox teenAUTO;
-        private Label label25;
-        private Label label26;
         private ListBox listBoxAuto;
-        private Panel panel6;
-        private Button valiteen;
-        private ListBox listBoxteen;
-        private Label label17;
     }
 }
