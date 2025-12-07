@@ -208,7 +208,7 @@ namespace Autod
                 OwnerName = c.Owner.FullName,
 
                 Services = c.CarServices?.Count ?? 0
-  
+
             })
             .ToList();
 
@@ -288,7 +288,7 @@ namespace Autod
 
         private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -362,10 +362,141 @@ namespace Autod
 
                     _db.SaveChanges(); // Сохраняем в базу
 
-                    LaeAutod(); // Обновляем DataGridView
+                    LaeAutod();
                 }
             }
         }
+        private void LisaAuto_Click(object sender, EventArgs e)
+        {
+            if (comboBoxOmanik.SelectedValue == null)
+            {
+                MessageBox.Show("Palun vali omanik.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxMARK.Text) ||
+                string.IsNullOrWhiteSpace(textBoxMODEL.Text) ||
+                string.IsNullOrWhiteSpace(textBoxRegNum.Text))
+            {
+                MessageBox.Show("Palun täida kõik väljad.");
+                return;
+            }
+
+            int ownerId = (int)comboBoxOmanik.SelectedValue;
+
+            var car = new Car
+            {
+                Brand = textBoxMARK.Text,
+                Model = textBoxMODEL.Text,
+                RegistrationNumber = textBoxRegNum.Text,
+                OwnerId = ownerId
+            };
+
+            _db.Cars.Add(car);
+            _db.SaveChanges();
+
+            LaeAutod();
+
+            MessageBox.Show("Auto lisatud!");
+        }
+
+        private void UpdateAuto_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Palun vali auto tabelist.");
+                return;
+            }
+
+            // Võtame valitud auto ID
+            int id = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
+
+            // Otsime andmebaasist
+            var car = _db.Cars.FirstOrDefault(c => c.Id == id);
+
+            if (car == null)
+            {
+                MessageBox.Show("Autot ei leitud.");
+                return;
+            }
+
+            // Kontrollime väljad
+            if (string.IsNullOrWhiteSpace(textBoxMARK.Text) ||
+                string.IsNullOrWhiteSpace(textBoxMODEL.Text) ||
+                string.IsNullOrWhiteSpace(textBoxRegNum.Text))
+            {
+                MessageBox.Show("Palun täida kõik väljad.");
+                return;
+            }
+
+            if (comboBoxOmanik.SelectedValue == null)
+            {
+                MessageBox.Show("Palun vali omanik.");
+                return;
+            }
+
+            // Uuendame väärtused
+            car.Brand = textBoxMARK.Text;
+            car.Model = textBoxMODEL.Text;
+            car.RegistrationNumber = textBoxRegNum.Text;
+            car.OwnerId = (int)comboBoxOmanik.SelectedValue;
+
+            _db.SaveChanges();
+
+            LaeAutod();
+
+            MessageBox.Show("Auto edukalt uuendatud!");
+        }
+
+        private void KustutaAuto_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Palun vali auto tabelist.");
+                return;
+            }
+
+            int id = (int)dataGridView2.SelectedRows[0].Cells["Id"].Value;
+
+            var car = _db.Cars
+                .Include(c => c.CarServices)  // kui autol on teenused, peame need eemaldama
+                .FirstOrDefault(c => c.Id == id);
+
+            if (car == null)
+            {
+                MessageBox.Show("Autot ei leitud.");
+                return;
+            }
+
+            // Kui autol on teenused – kustutame need esmalt
+            if (car.CarServices != null && car.CarServices.Any())
+            {
+                _db.CarServices.RemoveRange(car.CarServices);
+            }
+
+            _db.Cars.Remove(car);
+            _db.SaveChanges();
+
+            LaeAutod();
+
+            MessageBox.Show("Auto kustutatud!");
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return; 
+
+            DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+
+            textBoxMARK.Text = row.Cells["Brand"].Value?.ToString();
+            textBoxMODEL.Text = row.Cells["Model"].Value?.ToString();
+            textBoxRegNum.Text = row.Cells["RegistrationNumber"].Value?.ToString();
+
+
+            comboBoxOmanik.Text = row.Cells["OwnerName"].Value?.ToString();
+        }
+
+
 
 
 
