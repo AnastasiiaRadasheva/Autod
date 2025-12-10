@@ -96,9 +96,14 @@
             dataGridViewOmanik = new DataGridView();
             Autod = new TabControl();
             tabPage3 = new TabPage();
+            panel6 = new Panel();
+            textBox1 = new TextBox();
+            label22 = new Label();
+            label26 = new Label();
+            button2 = new Button();
+            label25 = new Label();
             button4 = new Button();
             button3 = new Button();
-            button2 = new Button();
             label17 = new Label();
             dataGridView5 = new DataGridView();
             autotable.SuspendLayout();
@@ -115,6 +120,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).BeginInit();
             Autod.SuspendLayout();
             tabPage3.SuspendLayout();
+            panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
             SuspendLayout();
             // 
@@ -858,9 +864,9 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(panel6);
             tabPage3.Controls.Add(button4);
             tabPage3.Controls.Add(button3);
-            tabPage3.Controls.Add(button2);
             tabPage3.Controls.Add(label17);
             tabPage3.Controls.Add(dataGridView5);
             tabPage3.Location = new Point(4, 29);
@@ -871,9 +877,64 @@
             tabPage3.Text = "Aeg";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // panel6
+            // 
+            panel6.Controls.Add(textBox1);
+            panel6.Controls.Add(label22);
+            panel6.Controls.Add(label26);
+            panel6.Controls.Add(button2);
+            panel6.Controls.Add(label25);
+            panel6.Location = new Point(492, 38);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(222, 259);
+            panel6.TabIndex = 28;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(89, 47);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(92, 27);
+            textBox1.TabIndex = 28;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(14, 47);
+            label22.Name = "label22";
+            label22.Size = new Size(58, 20);
+            label22.TabIndex = 25;
+            label22.Text = "label22";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(14, 142);
+            label26.Name = "label26";
+            label26.Size = new Size(58, 20);
+            label26.TabIndex = 27;
+            label26.Text = "label26";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(107, 210);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 37);
+            button2.TabIndex = 22;
+            button2.Text = "Lisa";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(14, 86);
+            label25.Name = "label25";
+            label25.Size = new Size(58, 20);
+            label25.TabIndex = 26;
+            label25.Text = "label25";
+            // 
             // button4
             // 
-            button4.Location = new Point(179, 407);
+            button4.Location = new Point(364, 354);
             button4.Name = "button4";
             button4.Size = new Size(111, 37);
             button4.TabIndex = 24;
@@ -882,28 +943,19 @@
             // 
             // button3
             // 
-            button3.Location = new Point(49, 407);
+            button3.Location = new Point(16, 354);
             button3.Name = "button3";
             button3.Size = new Size(112, 37);
             button3.TabIndex = 23;
             button3.Text = "Kustuta";
             button3.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            button2.Location = new Point(114, 341);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 37);
-            button2.TabIndex = 22;
-            button2.Text = "Lisa";
-            button2.UseVisualStyleBackColor = true;
-            // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Snap ITC", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label17.ForeColor = Color.LightSlateGray;
-            label17.Location = new Point(327, 10);
+            label17.Location = new Point(197, 3);
             label17.Name = "label17";
             label17.Size = new Size(90, 36);
             label17.TabIndex = 21;
@@ -912,10 +964,10 @@
             // dataGridView5
             // 
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView5.Location = new Point(105, 49);
+            dataGridView5.Location = new Point(16, 42);
             dataGridView5.Name = "dataGridView5";
             dataGridView5.RowHeadersWidth = 51;
-            dataGridView5.Size = new Size(578, 286);
+            dataGridView5.Size = new Size(459, 286);
             dataGridView5.TabIndex = 0;
             // 
             // Form1
@@ -954,6 +1006,8 @@
             Autod.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -1033,5 +1087,10 @@
         private Button button4;
         private Button button3;
         private Button button2;
+        private Panel panel6;
+        private TextBox textBox1;
+        private Label label22;
+        private Label label26;
+        private Label label25;
     }
 }

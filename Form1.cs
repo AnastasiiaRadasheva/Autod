@@ -34,7 +34,6 @@ namespace Autod
             s.StartTime,
             s.EndTime,
             CarBrand = s.Car.Brand,
-            CarModel = s.Car.Model,
             CarRegNum = s.Car.RegistrationNumber
         })
         .ToList();

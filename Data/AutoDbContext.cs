@@ -31,32 +31,44 @@ namespace Autod.Data
                 .Property(s => s.Price)
                 .HasColumnType("decimal(18,2)");
 
-            // Композитный ключ для CarService
+            // CarService — история выполненных услуг
+            // Рекомендация: использовать отдельный Id как PK, если одна услуга может выполняться несколько раз
             modelBuilder.Entity<CarService>()
-                .HasKey(cs => new { cs.CarId, cs.ServiceId });
+                .HasKey(cs => new { cs.CarId, cs.ServiceId, cs.DateOfService }); // альтернатива: можно добавить Id
 
-            // Связи CarService -> Car
             modelBuilder.Entity<CarService>()
                 .HasOne(cs => cs.Car)
                 .WithMany(c => c.CarServices)
-                .HasForeignKey(cs => cs.CarId);
+                .HasForeignKey(cs => cs.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Связи CarService -> Service
             modelBuilder.Entity<CarService>()
                 .HasOne(cs => cs.Service)
                 .WithMany(s => s.CarServices)
-                .HasForeignKey(cs => cs.ServiceId);
+                .HasForeignKey(cs => cs.ServiceId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Schedule
+            // Schedule — планирование записи автомобиля на обслуживание
             modelBuilder.Entity<Schedule>()
                 .HasOne(s => s.Car)
                 .WithMany(c => c.Schedules)
-                .HasForeignKey(s => s.CarId);
+                .HasForeignKey(s => s.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Ограничение — одна запись на одно и то же время
+            // Опционально — связь Schedule -> Service, если хотим знать услугу заранее
             modelBuilder.Entity<Schedule>()
-                .HasIndex(s => s.StartTime)
+                .HasOne(s => s.Service)
+                .WithMany()
+                .HasForeignKey(s => s.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict); // не удаляем услугу, если есть расписания
+
+            // Индекс для предотвращения пересечения записей
+            // Проверка уникальности StartTime для конкретной машины
+            modelBuilder.Entity<Schedule>()
+                .HasIndex(s => new { s.CarId, s.StartTime })
                 .IsUnique();
+
+            // Дополнительно: можно настроить диапазон времени, если нужно (StartTime < EndTime)
         }
 
     }
