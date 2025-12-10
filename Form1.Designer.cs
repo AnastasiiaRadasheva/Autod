@@ -95,6 +95,12 @@
             label3 = new Label();
             dataGridViewOmanik = new DataGridView();
             Autod = new TabControl();
+            tabPage3 = new TabPage();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            label17 = new Label();
+            dataGridView5 = new DataGridView();
             autotable.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -108,6 +114,8 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).BeginInit();
             Autod.SuspendLayout();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
             SuspendLayout();
             // 
             // comboBox1
@@ -839,12 +847,76 @@
             Autod.Controls.Add(tabPage1);
             Autod.Controls.Add(tabPage2);
             Autod.Controls.Add(autotable);
+            Autod.Controls.Add(tabPage3);
+            Autod.Cursor = Cursors.PanSW;
             Autod.Location = new Point(14, 16);
             Autod.Margin = new Padding(3, 4, 3, 4);
             Autod.Name = "Autod";
             Autod.SelectedIndex = 0;
             Autod.Size = new Size(758, 504);
             Autod.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(button4);
+            tabPage3.Controls.Add(button3);
+            tabPage3.Controls.Add(button2);
+            tabPage3.Controls.Add(label17);
+            tabPage3.Controls.Add(dataGridView5);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(750, 471);
+            tabPage3.TabIndex = 3;
+            tabPage3.Text = "Aeg";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(179, 407);
+            button4.Name = "button4";
+            button4.Size = new Size(111, 37);
+            button4.TabIndex = 24;
+            button4.Text = "Uuenda";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(49, 407);
+            button3.Name = "button3";
+            button3.Size = new Size(112, 37);
+            button3.TabIndex = 23;
+            button3.Text = "Kustuta";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(114, 341);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 37);
+            button2.TabIndex = 22;
+            button2.Text = "Lisa";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Snap ITC", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label17.ForeColor = Color.LightSlateGray;
+            label17.Location = new Point(327, 10);
+            label17.Name = "label17";
+            label17.Size = new Size(90, 36);
+            label17.TabIndex = 21;
+            label17.Text = "AEG";
+            // 
+            // dataGridView5
+            // 
+            dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView5.Location = new Point(105, 49);
+            dataGridView5.Name = "dataGridView5";
+            dataGridView5.RowHeadersWidth = 51;
+            dataGridView5.Size = new Size(578, 286);
+            dataGridView5.TabIndex = 0;
             // 
             // Form1
             // 
@@ -880,6 +952,9 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOmanik).EndInit();
             Autod.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -952,5 +1027,11 @@
         private ComboBox teenHOOLD;
         private ComboBox teenAUTO;
         private ListBox listBoxAuto;
+        private TabPage tabPage3;
+        private Label label17;
+        private DataGridView dataGridView5;
+        private Button button4;
+        private Button button3;
+        private Button button2;
     }
 }

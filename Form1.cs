@@ -20,10 +20,28 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
 
         }
+        private void LaeSchedule()
+        {
 
+            var data = _db.Schedules
+        .Include(s => s.Car)
+        .Select(s => new
+        {
+            s.Id,
+            s.StartTime,
+            s.EndTime,
+            CarBrand = s.Car.Brand,
+            CarModel = s.Car.Model,
+            CarRegNum = s.Car.RegistrationNumber
+        })
+        .ToList();
+
+            dataGridView5.DataSource = data;
+
+        }
         private void LaeOmanikud()
         {
             var data = _db.Owners

@@ -28,6 +28,7 @@ namespace Autod
         public Owner Owner { get; set; }
 
         public ICollection<CarService> CarServices { get; set; }
+        public ICollection<Schedule> Schedules { get; set; }
     }
     public class Service
     {
@@ -48,4 +49,15 @@ namespace Autod
         public DateTime DateOfService { get; set; }
         public int Mileage { get; set; }
     }
+    public class Schedule
+    {
+        public int Id { get; set; }
+
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        public int CarId { get; set; }
+        public Car Car { get; set; }
+    }
+
 }

@@ -10,6 +10,7 @@ namespace Autod.Data
 {
     public class AutoDbContext : DbContext
     {
+
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -20,6 +21,8 @@ namespace Autod.Data
             optionsBuilder.UseSqlServer(
               @"Server=(localdb)\MSSQLLocalDB;Database=Autod;Trusted_Connection=True;");
         }
+
+        public DbSet<Schedule> Schedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +46,18 @@ namespace Autod.Data
                 .HasOne(cs => cs.Service)
                 .WithMany(s => s.CarServices)
                 .HasForeignKey(cs => cs.ServiceId);
+
+            // Schedule
+            modelBuilder.Entity<Schedule>()
+                .HasOne(s => s.Car)
+                .WithMany(c => c.Schedules)
+                .HasForeignKey(s => s.CarId);
+
+            // Ограничение — одна запись на одно и то же время
+            modelBuilder.Entity<Schedule>()
+                .HasIndex(s => s.StartTime)
+                .IsUnique();
         }
+
     }
 }
