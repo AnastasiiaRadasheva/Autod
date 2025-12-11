@@ -26,6 +26,7 @@ namespace Autod
 
             LaeTeenCombo();
             LaeAutoCombo();
+            LaeWorkerCombo();
             startPicker.MinDate = DateTime.Today;
             timePicker.MinDate = DateTime.Now;
         }
@@ -56,18 +57,18 @@ namespace Autod
         }
         private void LaeWorkerCombo()
         {
-            var owners = _db.Worker
+            var owners = _db.Workers
 
                 .Select(o => new
                 {
                     o.Id,
-                    o.Name
+                    o.FullName
                 })
                 .ToList();
 
-            serviceCombo.DataSource = owners;
-            serviceCombo.DisplayMember = "Name";
-            serviceCombo.ValueMember = "Id";
+            workCOMBO.DataSource = owners;
+            workCOMBO.DisplayMember = "Name";
+            workCOMBO.ValueMember = "Id";
         }
         private void LaeAutoCombo()
         {
@@ -102,13 +103,14 @@ namespace Autod
                 return;
             }
 
-            // дата
+            if (workCOMBO.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите работника!");
+                return;
+            }
+
             DateTime date = startPicker.Value.Date;
-
-            // время
             DateTime time = timePicker.Value;
-
-            // объединяем дату и время
             DateTime start = date.Add(time.TimeOfDay);
 
             if (start < DateTime.Now)
@@ -120,12 +122,42 @@ namespace Autod
             int duration = (int)durationUpDown.Value;
             DateTime end = start.AddHours(duration);
 
+            int workerId = (int)workCOMBO.SelectedValue;
+            int carId = (int)autoCombo.SelectedValue;
+
+            bool isWorkerBusy = _db.Schedules.Any(s =>
+                s.WorkerId == workerId &&
+                ((start >= s.StartTime && start < s.EndTime) || // новая запись начинается внутри существующей
+                 (end > s.StartTime && end <= s.EndTime) ||    // новая запись заканчивается внутри существующей
+                 (start <= s.StartTime && end >= s.EndTime))   // новая запись полностью перекрывает существующую
+            );
+
+            if (isWorkerBusy)
+            {
+                MessageBox.Show("Этот работник уже занят в выбранное время!");
+                return;
+            }
+
+            bool isCarBusy = _db.Schedules.Any(s =>
+                s.CarId == carId &&
+                ((start >= s.StartTime && start < s.EndTime) ||
+                 (end > s.StartTime && end <= s.EndTime) ||
+                 (start <= s.StartTime && end >= s.EndTime))
+            );
+
+            if (isCarBusy)
+            {
+                MessageBox.Show("Эта машина уже занята в выбранное время!");
+                return;
+            }
+
             var schedule = new Schedule
             {
                 StartTime = start,
                 EndTime = end,
-                CarId = (int)autoCombo.SelectedValue,
-                ServiceId = (int)serviceCombo.SelectedValue
+                CarId = carId,
+                ServiceId = (int)serviceCombo.SelectedValue,
+                WorkerId = workerId
             };
 
             _db.Schedules.Add(schedule);

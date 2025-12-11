@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autod.Migrations
 {
     [DbContext(typeof(AutoDbContext))]
-    [Migration("20251127110438_InitialExtendedSchema")]
-    partial class InitialExtendedSchema
+    [Migration("20251211110407_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace Autod.Migrations
                     b.Property<int>("Mileage")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId", "ServiceId");
+                    b.HasKey("CarId", "ServiceId", "DateOfService");
 
                     b.HasIndex("ServiceId");
 
@@ -97,6 +97,41 @@ namespace Autod.Migrations
                     b.ToTable("Owners");
                 });
 
+            modelBuilder.Entity("Autod.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WorkerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("WorkerId");
+
+                    b.HasIndex("CarId", "StartTime")
+                        .IsUnique();
+
+                    b.ToTable("Schedules");
+                });
+
             modelBuilder.Entity("Autod.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -115,6 +150,23 @@ namespace Autod.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Autod.Worker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("Autod.Car", b =>
@@ -147,9 +199,38 @@ namespace Autod.Migrations
                     b.Navigation("Service");
                 });
 
+            modelBuilder.Entity("Autod.Schedule", b =>
+                {
+                    b.HasOne("Autod.Car", "Car")
+                        .WithMany("Schedules")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Autod.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Autod.Worker", "Worker")
+                        .WithMany("Schedules")
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Service");
+
+                    b.Navigation("Worker");
+                });
+
             modelBuilder.Entity("Autod.Car", b =>
                 {
                     b.Navigation("CarServices");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("Autod.Owner", b =>
@@ -160,6 +241,11 @@ namespace Autod.Migrations
             modelBuilder.Entity("Autod.Service", b =>
                 {
                     b.Navigation("CarServices");
+                });
+
+            modelBuilder.Entity("Autod.Worker", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

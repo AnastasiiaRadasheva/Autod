@@ -29,11 +29,13 @@ namespace Autod
             var data = _db.Schedules
         .Include(s => s.Car)
         .Include(cs => cs.Service)
+        .Include(cs => cs.Worker)
         .Select(s => new
         {
             s.Id,
             s.StartTime,
             s.EndTime,
+            Worker = s.Worker.FullName,
             Service = s.Service.Name,
             CarBrand = s.Car.Brand,
             CarRegNum = s.Car.RegistrationNumber

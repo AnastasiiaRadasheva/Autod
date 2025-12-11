@@ -163,7 +163,7 @@ namespace Autod.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Worker");
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("Autod.Car", b =>
