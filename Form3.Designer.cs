@@ -40,6 +40,9 @@
             serviceCombo = new ComboBox();
             autoCombo = new ComboBox();
             Lisa = new Label();
+            workCOMBO = new ComboBox();
+            Töötaja = new Label();
+            label4 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)durationUpDown).BeginInit();
             SuspendLayout();
@@ -85,6 +88,9 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(Töötaja);
+            panel1.Controls.Add(workCOMBO);
             panel1.Controls.Add(timePicker);
             panel1.Controls.Add(durationUpDown);
             panel1.Controls.Add(startPicker);
@@ -111,7 +117,7 @@
             // 
             // durationUpDown
             // 
-            durationUpDown.Location = new Point(86, 146);
+            durationUpDown.Location = new Point(86, 144);
             durationUpDown.Name = "durationUpDown";
             durationUpDown.Size = new Size(210, 23);
             durationUpDown.TabIndex = 13;
@@ -159,12 +165,38 @@
             Lisa.TabIndex = 9;
             Lisa.Text = "Lisa";
             // 
+            // workCOMBO
+            // 
+            workCOMBO.FormattingEnabled = true;
+            workCOMBO.Location = new Point(86, 173);
+            workCOMBO.Name = "workCOMBO";
+            workCOMBO.Size = new Size(210, 23);
+            workCOMBO.TabIndex = 15;
+            // 
+            // Töötaja
+            // 
+            Töötaja.AutoSize = true;
+            Töötaja.Location = new Point(30, 176);
+            Töötaja.Name = "Töötaja";
+            Töötaja.Size = new Size(49, 15);
+            Töötaja.TabIndex = 16;
+            Töötaja.Text = "Töötaja:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(30, 144);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 15);
+            label4.TabIndex = 17;
+            label4.Text = "Tunt:";
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ScrollBar;
-            ClientSize = new Size(387, 351);
+            ClientSize = new Size(386, 344);
             Controls.Add(Lisa);
             Controls.Add(panel1);
             Controls.Add(formkoik);
@@ -193,5 +225,8 @@
         private DateTimePicker startPicker;
         private Label paev;
         private DateTimePicker timePicker;
+        private Label label4;
+        private Label Töötaja;
+        private ComboBox workCOMBO;
     }
 }

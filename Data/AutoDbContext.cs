@@ -15,6 +15,8 @@ namespace Autod.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<CarService> CarServices { get; set; }
+        public DbSet<Worker> Workers { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

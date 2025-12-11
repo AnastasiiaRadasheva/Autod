@@ -54,6 +54,21 @@ namespace Autod
             serviceCombo.DisplayMember = "Name";
             serviceCombo.ValueMember = "Id";
         }
+        private void LaeWorkerCombo()
+        {
+            var owners = _db.Worker
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.Name
+                })
+                .ToList();
+
+            serviceCombo.DataSource = owners;
+            serviceCombo.DisplayMember = "Name";
+            serviceCombo.ValueMember = "Id";
+        }
         private void LaeAutoCombo()
         {
             var auto = _db.Cars
