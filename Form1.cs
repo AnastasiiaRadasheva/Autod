@@ -28,11 +28,13 @@ namespace Autod
 
             var data = _db.Schedules
         .Include(s => s.Car)
+        .Include(cs => cs.Service)
         .Select(s => new
         {
             s.Id,
             s.StartTime,
             s.EndTime,
+            Service = s.Service.Name,
             CarBrand = s.Car.Brand,
             CarRegNum = s.Car.RegistrationNumber
         })
@@ -751,6 +753,12 @@ namespace Autod
 
             int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
             return id;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            var form = new Form3();
+            form.Show(); // открыть как новое окно
         }
 
 
