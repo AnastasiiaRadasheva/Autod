@@ -23,7 +23,7 @@ namespace Autod
             LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
 
         }
-        private void LaeSchedule()
+        public void LaeSchedule()
         {
 
             var data = _db.Schedules
@@ -757,8 +757,9 @@ namespace Autod
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            var form = new Form3();
-            form.Show(); // открыть как новое окно
+            var form = new Form3(this, _db);
+            form.Show();
+            LaeSchedule();
         }
 
 

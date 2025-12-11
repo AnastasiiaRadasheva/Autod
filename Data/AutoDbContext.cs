@@ -68,7 +68,13 @@ namespace Autod.Data
                 .HasIndex(s => new { s.CarId, s.StartTime })
                 .IsUnique();
 
-            // Дополнительно: можно настроить диапазон времени, если нужно (StartTime < EndTime)
+            // Schedule -> Worker
+            modelBuilder.Entity<Schedule>()
+                .HasOne(s => s.Worker)
+                .WithMany(w => w.Schedules)
+                .HasForeignKey(s => s.WorkerId)
+                .OnDelete(DeleteBehavior.Restrict); 
+
         }
 
     }

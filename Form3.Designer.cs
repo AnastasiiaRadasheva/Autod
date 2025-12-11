@@ -33,6 +33,7 @@
             label3 = new Label();
             formkoik = new Button();
             panel1 = new Panel();
+            timePicker = new DateTimePicker();
             durationUpDown = new NumericUpDown();
             startPicker = new DateTimePicker();
             paev = new Label();
@@ -56,7 +57,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(30, 121);
+            label2.Location = new Point(30, 115);
             label2.Name = "label2";
             label2.Size = new Size(31, 15);
             label2.TabIndex = 1;
@@ -74,7 +75,7 @@
             // 
             // formkoik
             // 
-            formkoik.Location = new Point(282, 224);
+            formkoik.Location = new Point(282, 262);
             formkoik.Name = "formkoik";
             formkoik.Size = new Size(75, 23);
             formkoik.TabIndex = 4;
@@ -84,6 +85,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(timePicker);
             panel1.Controls.Add(durationUpDown);
             panel1.Controls.Add(startPicker);
             panel1.Controls.Add(paev);
@@ -94,18 +96,29 @@
             panel1.Controls.Add(label3);
             panel1.Location = new Point(25, 50);
             panel1.Name = "panel1";
-            panel1.Size = new Size(332, 157);
+            panel1.Size = new Size(332, 206);
             panel1.TabIndex = 8;
+            // 
+            // timePicker
+            // 
+            timePicker.Format = DateTimePickerFormat.Time;
+            timePicker.Location = new Point(86, 115);
+            timePicker.Name = "timePicker";
+            timePicker.ShowUpDown = true;
+            timePicker.Size = new Size(210, 23);
+            timePicker.TabIndex = 14;
+            timePicker.Value = new DateTime(2025, 12, 11, 12, 0, 0, 0);
             // 
             // durationUpDown
             // 
-            durationUpDown.Location = new Point(86, 118);
+            durationUpDown.Location = new Point(86, 146);
             durationUpDown.Name = "durationUpDown";
             durationUpDown.Size = new Size(210, 23);
             durationUpDown.TabIndex = 13;
             // 
             // startPicker
             // 
+            startPicker.Format = DateTimePickerFormat.Short;
             startPicker.Location = new Point(86, 86);
             startPicker.Name = "startPicker";
             startPicker.Size = new Size(210, 23);
@@ -151,7 +164,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ScrollBar;
-            ClientSize = new Size(387, 283);
+            ClientSize = new Size(387, 351);
             Controls.Add(Lisa);
             Controls.Add(panel1);
             Controls.Add(formkoik);
@@ -179,5 +192,6 @@
         private NumericUpDown durationUpDown;
         private DateTimePicker startPicker;
         private Label paev;
+        private DateTimePicker timePicker;
     }
 }

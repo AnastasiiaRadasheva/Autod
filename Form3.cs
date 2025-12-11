@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autod.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,15 +10,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Autod
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        private Form1 _mainForm;
+        public Form3(Form1 mainForm, AutoDbContext db)
         {
             InitializeComponent();
-        }
 
+            _mainForm = mainForm;
+            _db = db;
+
+
+            LaeTeenCombo();
+            LaeAutoCombo();
+            startPicker.MinDate = DateTime.Today;
+            timePicker.MinDate = DateTime.Now;
+        }
+        private AutoDbContext _db;
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -26,7 +39,36 @@ namespace Autod
         {
 
         }
+        private void LaeTeenCombo()
+        {
+            var owners = _db.Services
 
+                .Select(o => new
+                {
+                    o.Id,
+                    o.Name
+                })
+                .ToList();
+
+            serviceCombo.DataSource = owners;
+            serviceCombo.DisplayMember = "Name";
+            serviceCombo.ValueMember = "Id";
+        }
+        private void LaeAutoCombo()
+        {
+            var auto = _db.Cars
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.RegistrationNumber
+                })
+                .ToList();
+
+            autoCombo.DataSource = auto;
+            autoCombo.DisplayMember = "RegistrationNumber";
+            autoCombo.ValueMember = "Id";
+        }
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -45,14 +87,22 @@ namespace Autod
                 return;
             }
 
-            DateTime start = startPicker.Value;
-            if (start < DateTime.Now.Date)
+            // дата
+            DateTime date = startPicker.Value.Date;
+
+            // время
+            DateTime time = timePicker.Value;
+
+            // объединяем дату и время
+            DateTime start = date.Add(time.TimeOfDay);
+
+            if (start < DateTime.Now)
             {
-                MessageBox.Show("Дата должна быть сегодня или в будущем!");
+                MessageBox.Show("Нельзя выбрать время в прошлом!");
                 return;
             }
 
-            int duration = (int)durationUpDown.Value; 
+            int duration = (int)durationUpDown.Value;
             DateTime end = start.AddHours(duration);
 
             var schedule = new Schedule
@@ -67,7 +117,9 @@ namespace Autod
             _db.SaveChanges();
 
             MessageBox.Show("Запись добавлена!");
-            
+            _mainForm.LaeSchedule();
         }
+
     }
+
 }

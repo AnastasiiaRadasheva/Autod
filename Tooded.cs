@@ -61,7 +61,18 @@ namespace Autod
 
         public int ServiceId { get; set; }
         public Service Service { get; set; }
+        public int WorkerId { get; set; }
+        public Worker Worker { get; set; }
 
+
+    }
+    public class Worker
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+
+        // Работник может иметь МНОГО записей
+        public List<Schedule> Schedules { get; set; }
     }
 
 
