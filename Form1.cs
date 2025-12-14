@@ -30,6 +30,7 @@ namespace Autod
         .Include(s => s.Car)
         .Include(cs => cs.Service)
         .Include(cs => cs.Worker)
+
         .Select(s => new
         {
             s.Id,
@@ -95,7 +96,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -114,7 +115,11 @@ namespace Autod
             return id;
         }
 
+        private void uuslisamine(int umber)
+        {
+            var servevis = "";
 
+        }
         private void lisaBTN_Click(object sender, EventArgs e)
         {
             try
@@ -294,12 +299,27 @@ namespace Autod
                     LaeOmanikud();
                     LaeAutod();
 
+                    // Обновляем список автомобилей в listBoxAuto
+                    LaeListBoxAuto(ownerId);
+
+
                     MessageBox.Show("Valitud autod on lisatud omanikule!");
                 }
             }
         }
 
 
+        private void LaeListBoxAuto(int ownerId)
+        {
+            var cars = _db.Cars
+                .Where(c => c.OwnerId == ownerId)
+                .OrderByDescending(c => c.Id)
+                .Take(5)
+                .Select(c => $"{c.Brand} {c.Model} ({c.RegistrationNumber})")
+                .ToList();
+
+            listBoxAuto.DataSource = cars;
+        }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -426,7 +446,11 @@ namespace Autod
             _db.Cars.Add(car);
             _db.SaveChanges();
 
+            LaeOmanikud();
             LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
 
             MessageBox.Show("Auto lisatud!");
         }
@@ -476,7 +500,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
         }
 
         private void KustutaAuto_Click(object sender, EventArgs e)
@@ -513,7 +537,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -552,7 +576,7 @@ namespace Autod
 
             _db.Services.Add(service);
             _db.SaveChanges();
-            LaeService();
+            LaeService(); LaeHooldusCombo();
 
             MessageBox.Show("Hooldus edukalt lisatud!");
         }
@@ -595,7 +619,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
 
@@ -632,7 +656,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
 
@@ -680,7 +704,7 @@ namespace Autod
             LaeAutod();
             LaeService();
             LaeCarService();
-            LaeOmanikudCombo();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
         }
 
         private void dataGridViewOmanik_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -694,7 +718,43 @@ namespace Autod
 
         private void uuendTEEN_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int id = GetSelectedServiceId();
 
+                var service = _db.Services.FirstOrDefault(s => s.Id == id);
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(NimiHOLD.Text))
+                {
+                    MessageBox.Show("Palun sisesta hoolduse nimi.");
+                    return;
+                }
+
+                if (!float.TryParse(hindHOLD.Text, out float hind))
+                {
+                    MessageBox.Show("Hind peab olema number.");
+                    return;
+                }
+                service.Name = NimiHOLD.Text;
+                service.Price = hind;
+
+                _db.SaveChanges();
+                LaeService();
+                MessageBox.Show("Hooldus edukalt uuendatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
         private void lisaTEEN_Click(object sender, EventArgs e)
@@ -741,7 +801,38 @@ namespace Autod
 
         private void kustTEEN_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int id = GetSelectedServiceId();
 
+                var service = _db.Services
+                    .Include(s => s.CarServices)
+                    .FirstOrDefault(s => s.Id == id);
+
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                if (service.CarServices != null && service.CarServices.Any())
+                {
+                    _db.CarServices.RemoveRange(service.CarServices);
+                }
+
+                _db.Services.Remove(service);
+                _db.SaveChanges();
+                LaeService();
+                MessageBox.Show("Hooldus kustutatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
 
@@ -762,6 +853,59 @@ namespace Autod
             var form = new Form3(this, _db);
             form.Show();
             LaeSchedule();
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (dataGridView5.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Пожалуйста, выберите запись из расписания.");
+                return;
+            }
+
+            int scheduleId = (int)dataGridView5.SelectedRows[0].Cells["Id"].Value;
+            var form = new Form3(this, _db, scheduleId); // Передаем Id
+            form.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView5.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Пожалуйста, выберите запись из расписания.");
+                return;
+            }
+
+            int scheduleId = (int)dataGridView5.SelectedRows[0].Cells["Id"].Value;
+
+            var schedule = _db.Schedules.FirstOrDefault(s => s.Id == scheduleId);
+
+            if (schedule == null)
+            {
+                MessageBox.Show("Запись не найдена.");
+                return;
+            }
+
+            _db.Schedules.Remove(schedule);
+            _db.SaveChanges();
+
+            LaeSchedule();
+            MessageBox.Show("Запись успешно удалена!");
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxAuto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 

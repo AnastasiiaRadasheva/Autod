@@ -16,19 +16,43 @@ namespace Autod
     public partial class Form3 : Form
     {
         private Form1 _mainForm;
-        public Form3(Form1 mainForm, AutoDbContext db)
+        private int? _editScheduleId = null;
+
+        public Form3(Form1 mainForm, AutoDbContext db, int? scheduleId = null)
         {
             InitializeComponent();
 
             _mainForm = mainForm;
             _db = db;
-
+            _editScheduleId = scheduleId;
 
             LaeTeenCombo();
             LaeAutoCombo();
             LaeWorkerCombo();
             startPicker.MinDate = DateTime.Today;
             timePicker.MinDate = DateTime.Now;
+
+            if (_editScheduleId.HasValue)
+                LaeScheduleData(_editScheduleId.Value);
+        }
+
+        private void LaeScheduleData(int scheduleId)
+        {
+            var schedule = _db.Schedules
+                .Include(s => s.Car)
+                .Include(s => s.Service)
+                .Include(s => s.Worker)
+                .FirstOrDefault(s => s.Id == scheduleId);
+
+            if (schedule != null)
+            {
+                autoCombo.SelectedValue = schedule.CarId;
+                serviceCombo.SelectedValue = schedule.ServiceId;
+                workCOMBO.SelectedValue = schedule.WorkerId;
+                startPicker.Value = schedule.StartTime.Date;
+                timePicker.Value = schedule.StartTime;
+                durationUpDown.Value = (decimal)(schedule.EndTime - schedule.StartTime).TotalHours;
+            }
         }
         private AutoDbContext _db;
         private void label1_Click(object sender, EventArgs e)
@@ -124,12 +148,12 @@ namespace Autod
 
             int workerId = (int)workCOMBO.SelectedValue;
             int carId = (int)autoCombo.SelectedValue;
-
             bool isWorkerBusy = _db.Schedules.Any(s =>
                 s.WorkerId == workerId &&
-                ((start >= s.StartTime && start < s.EndTime) || // новая запись начинается внутри существующей
-                 (end > s.StartTime && end <= s.EndTime) ||    // новая запись заканчивается внутри существующей
-                 (start <= s.StartTime && end >= s.EndTime))   // новая запись полностью перекрывает существующую
+                (!_editScheduleId.HasValue || s.Id != _editScheduleId.Value) &&
+                ((start >= s.StartTime && start < s.EndTime) ||
+                 (end > s.StartTime && end <= s.EndTime) ||
+                 (start <= s.StartTime && end >= s.EndTime))
             );
 
             if (isWorkerBusy)
@@ -140,6 +164,7 @@ namespace Autod
 
             bool isCarBusy = _db.Schedules.Any(s =>
                 s.CarId == carId &&
+                (!_editScheduleId.HasValue || s.Id != _editScheduleId.Value) &&
                 ((start >= s.StartTime && start < s.EndTime) ||
                  (end > s.StartTime && end <= s.EndTime) ||
                  (start <= s.StartTime && end >= s.EndTime))
@@ -151,21 +176,43 @@ namespace Autod
                 return;
             }
 
-            var schedule = new Schedule
+            if (_editScheduleId.HasValue)
             {
-                StartTime = start,
-                EndTime = end,
-                CarId = carId,
-                ServiceId = (int)serviceCombo.SelectedValue,
-                WorkerId = workerId
-            };
+                var schedule = _db.Schedules.FirstOrDefault(s => s.Id == _editScheduleId.Value);
+                if (schedule != null)
+                {
+                    schedule.StartTime = start;
+                    schedule.EndTime = end;
+                    schedule.CarId = carId;
+                    schedule.ServiceId = (int)serviceCombo.SelectedValue;
+                    schedule.WorkerId = workerId;
 
-            _db.Schedules.Add(schedule);
-            _db.SaveChanges();
+                    _db.SaveChanges();
+                    MessageBox.Show("Запись обновлена!");
+                    _mainForm.LaeSchedule();
+                    this.Close();
+                }
+            }
+            else
+            {
+                var schedule = new Schedule
+                {
+                    StartTime = start,
+                    EndTime = end,
+                    CarId = carId,
+                    ServiceId = (int)serviceCombo.SelectedValue,
+                    WorkerId = workerId
+                };
 
-            MessageBox.Show("Запись добавлена!");
-            _mainForm.LaeSchedule();
+                _db.Schedules.Add(schedule);
+                _db.SaveChanges();
+
+                MessageBox.Show("Запись добавлена!");
+                _mainForm.LaeSchedule();
+                this.Close();
+            }
         }
+
 
     }
 
