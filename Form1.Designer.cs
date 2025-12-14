@@ -107,6 +107,19 @@
             button4 = new Button();
             label17 = new Label();
             dataGridView5 = new DataGridView();
+            tabPage4 = new TabPage();
+            textBox5 = new TextBox();
+            label27 = new Label();
+            panel7 = new Panel();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
+            dataGridView1 = new DataGridView();
+            label28 = new Label();
+            label29 = new Label();
+            textBox6 = new TextBox();
+            panel8 = new Panel();
+            label30 = new Label();
             autotable.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -123,6 +136,10 @@
             tabPage3.SuspendLayout();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
+            tabPage4.SuspendLayout();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel8.SuspendLayout();
             SuspendLayout();
             // 
             // comboBox1
@@ -884,6 +901,7 @@
             Autod.Controls.Add(tabPage2);
             Autod.Controls.Add(autotable);
             Autod.Controls.Add(tabPage3);
+            Autod.Controls.Add(tabPage4);
             Autod.Cursor = Cursors.PanSW;
             Autod.Location = new Point(14, 16);
             Autod.Margin = new Padding(3, 4, 3, 4);
@@ -905,7 +923,7 @@
             tabPage3.Padding = new Padding(3);
             tabPage3.Size = new Size(750, 507);
             tabPage3.TabIndex = 3;
-            tabPage3.Text = "Aeg";
+            tabPage3.Text = "Ajakavad";
             // 
             // textBox4
             // 
@@ -990,6 +1008,137 @@
             dataGridView5.Size = new Size(571, 420);
             dataGridView5.TabIndex = 0;
             // 
+            // tabPage4
+            // 
+            tabPage4.BackColor = SystemColors.GradientInactiveCaption;
+            tabPage4.Controls.Add(panel8);
+            tabPage4.Controls.Add(label28);
+            tabPage4.Controls.Add(textBox5);
+            tabPage4.Controls.Add(label27);
+            tabPage4.Controls.Add(panel7);
+            tabPage4.Controls.Add(dataGridView1);
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(750, 507);
+            tabPage4.TabIndex = 4;
+            tabPage4.Text = "Tootaja";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(129, 480);
+            textBox5.Margin = new Padding(3, 4, 3, 4);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(145, 27);
+            textBox5.TabIndex = 38;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(16, 480);
+            label27.Name = "label27";
+            label27.Size = new Size(95, 20);
+            label27.TabIndex = 37;
+            label27.Text = "Otsi hooldus:";
+            // 
+            // panel7
+            // 
+            panel7.BackColor = Color.SlateGray;
+            panel7.Controls.Add(button6);
+            panel7.Controls.Add(button7);
+            panel7.Location = new Point(616, 165);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(128, 116);
+            panel7.TabIndex = 36;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.Azure;
+            button5.FlatStyle = FlatStyle.Popup;
+            button5.Location = new Point(130, 62);
+            button5.Name = "button5";
+            button5.Size = new Size(84, 28);
+            button5.TabIndex = 22;
+            button5.Text = "Lisa uus ";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.Firebrick;
+            button6.FlatStyle = FlatStyle.Popup;
+            button6.Location = new Point(7, 67);
+            button6.Name = "button6";
+            button6.Size = new Size(112, 37);
+            button6.TabIndex = 23;
+            button6.Text = "Kustuta";
+            button6.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            button7.FlatStyle = FlatStyle.Popup;
+            button7.Location = new Point(7, 15);
+            button7.Name = "button7";
+            button7.Size = new Size(111, 37);
+            button7.TabIndex = 24;
+            button7.Text = "Uuenda";
+            button7.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(16, 53);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(472, 420);
+            dataGridView1.TabIndex = 35;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Font = new Font("Snap ITC", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label28.ForeColor = Color.LightSlateGray;
+            label28.Location = new Point(173, 14);
+            label28.Name = "label28";
+            label28.Size = new Size(161, 36);
+            label28.TabIndex = 39;
+            label28.Text = "Tootajad";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(18, 32);
+            label29.Name = "label29";
+            label29.Size = new Size(44, 20);
+            label29.TabIndex = 40;
+            label29.Text = "Nimi:";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(86, 29);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(128, 27);
+            textBox6.TabIndex = 41;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(label30);
+            panel8.Controls.Add(button5);
+            panel8.Controls.Add(label29);
+            panel8.Controls.Add(textBox6);
+            panel8.Location = new Point(494, 53);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(250, 106);
+            panel8.TabIndex = 42;
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new Point(64, 6);
+            label30.Name = "label30";
+            label30.Size = new Size(112, 20);
+            label30.TabIndex = 42;
+            label30.Text = "Lisa uus tootaja";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1027,6 +1176,12 @@
             tabPage3.PerformLayout();
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1111,5 +1266,18 @@
         private TextBox textBox3;
         private TextBox textBox4;
         private Label label26;
+        private TabPage tabPage4;
+        private Panel panel8;
+        private Label label30;
+        private Button button5;
+        private Label label29;
+        private TextBox textBox6;
+        private Panel panel7;
+        private Button button6;
+        private Button button7;
+        private Label label28;
+        private TextBox textBox5;
+        private Label label27;
+        private DataGridView dataGridView1;
     }
 }
