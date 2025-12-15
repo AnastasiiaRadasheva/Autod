@@ -917,7 +917,13 @@ namespace Autod
             comboBox1.Items.Clear();
             comboBox1.Items.Add("Eesti");
             comboBox1.Items.Add("English");
-            comboBox1.SelectedItem = "Eesti";
+
+            string lang = Properties.Settings.Default.UserLanguage;
+
+            if (lang == "en-US")
+                comboBox1.SelectedItem = "English";
+            else
+                comboBox1.SelectedItem = "Eesti";
 
             _keelLaetud = true;
 
@@ -930,13 +936,18 @@ namespace Autod
 
         private void ChangeLanguage(string lang)
         {
+            // Salvesta valik
+            Properties.Settings.Default.UserLanguage = lang;
+            Properties.Settings.Default.Save();
+
+            // Muuda kultuur
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
 
+            // Rakenda ressursid uuesti (sina juba kasutad seda meetodit)
             var res = new ComponentResourceManager(typeof(Form1));
-
             ApplyResourcesToControl(this, res);
-            res.ApplyResources(this, "$Form1");   // vormi pealkiri
+            res.ApplyResources(this, "$this");
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
