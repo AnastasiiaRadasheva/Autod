@@ -2,7 +2,9 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Autod
@@ -907,9 +909,62 @@ namespace Autod
         {
 
         }
+        bool _keelLaetud = false;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            _keelLaetud = false;
+
+            comboBox1.Items.Clear();
+            comboBox1.Items.Add("Eesti");
+            comboBox1.Items.Add("English");
+            comboBox1.SelectedItem = "Eesti";
+
+            _keelLaetud = true;
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangeLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+
+            var res = new ComponentResourceManager(typeof(Form1));
+
+            ApplyResourcesToControl(this, res);
+            res.ApplyResources(this, "$Form1");   // vormi pealkiri
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_keelLaetud)
+                return;
+
+            if (comboBox1.SelectedItem.ToString() == "English")
+                ChangeLanguage("en-US");
+            else
+                ChangeLanguage("et-EE");
+        }
 
 
 
+
+        private void ApplyResourcesToControl(Control ctrl, ComponentResourceManager res)
+        {
+            res.ApplyResources(ctrl, ctrl.Name);
+            foreach (Control child in ctrl.Controls)
+            {
+                ApplyResourcesToControl(child, res);
+            }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
 
