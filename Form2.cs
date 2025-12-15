@@ -13,12 +13,12 @@ namespace Autod
 {
     public partial class Form2 : Form
     {
-        private readonly AutoDbContext _db; 
+        private readonly AutoDbContext _db;
         public Form2(AutoDbContext db)
         {
             InitializeComponent();
-            _db = db;  
-            PopulateCheckedListBox(); 
+            _db = db;
+            PopulateCheckedListBox();
         }
         private void PopulateCheckedListBox()
         {
@@ -55,6 +55,11 @@ namespace Autod
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

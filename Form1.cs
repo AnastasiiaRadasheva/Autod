@@ -966,6 +966,16 @@ namespace Autod
 
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textOTS_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 

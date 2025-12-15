@@ -144,14 +144,13 @@
             // 
             // comboBox1
             // 
-            resources.ApplyResources(comboBox1, "comboBox1");
             comboBox1.FormattingEnabled = true;
+            resources.ApplyResources(comboBox1, "comboBox1");
             comboBox1.Name = "comboBox1";
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // autotable
             // 
-            resources.ApplyResources(autotable, "autotable");
             autotable.BackColor = SystemColors.GradientInactiveCaption;
             autotable.Controls.Add(textBox3);
             autotable.Controls.Add(label25);
@@ -165,6 +164,7 @@
             autotable.Controls.Add(dataGridView4);
             autotable.Controls.Add(label12);
             autotable.Controls.Add(dataGridView3);
+            resources.ApplyResources(autotable, "autotable");
             autotable.Name = "autotable";
             // 
             // textBox3
@@ -196,7 +196,6 @@
             // 
             // panel4
             // 
-            resources.ApplyResources(panel4, "panel4");
             panel4.BackColor = Color.LightSteelBlue;
             panel4.Controls.Add(teenHOOLD);
             panel4.Controls.Add(teenAUTO);
@@ -209,18 +208,19 @@
             panel4.Controls.Add(lisaTEEN);
             panel4.Controls.Add(teenKUUPAEV);
             panel4.Controls.Add(teenKIRJ);
+            resources.ApplyResources(panel4, "panel4");
             panel4.Name = "panel4";
             // 
             // teenHOOLD
             // 
-            resources.ApplyResources(teenHOOLD, "teenHOOLD");
             teenHOOLD.FormattingEnabled = true;
+            resources.ApplyResources(teenHOOLD, "teenHOOLD");
             teenHOOLD.Name = "teenHOOLD";
             // 
             // teenAUTO
             // 
-            resources.ApplyResources(teenAUTO, "teenAUTO");
             teenAUTO.FormattingEnabled = true;
+            resources.ApplyResources(teenAUTO, "teenAUTO");
             teenAUTO.Name = "teenAUTO";
             // 
             // label24
@@ -235,16 +235,16 @@
             // 
             // uuendTEEN
             // 
-            resources.ApplyResources(uuendTEEN, "uuendTEEN");
             uuendTEEN.BackColor = Color.LightSlateGray;
+            resources.ApplyResources(uuendTEEN, "uuendTEEN");
             uuendTEEN.Name = "uuendTEEN";
             uuendTEEN.UseVisualStyleBackColor = false;
             uuendTEEN.Click += uuendTEEN_Click;
             // 
             // kustTEEN
             // 
-            resources.ApplyResources(kustTEEN, "kustTEEN");
             kustTEEN.BackColor = Color.Firebrick;
+            resources.ApplyResources(kustTEEN, "kustTEEN");
             kustTEEN.ForeColor = Color.White;
             kustTEEN.Name = "kustTEEN";
             kustTEEN.UseVisualStyleBackColor = false;
@@ -279,7 +279,6 @@
             // 
             // panel3
             // 
-            resources.ApplyResources(panel3, "panel3");
             panel3.BackColor = Color.SlateGray;
             panel3.Controls.Add(uuendHOLD);
             panel3.Controls.Add(kustHOLD);
@@ -288,20 +287,21 @@
             panel3.Controls.Add(lisaHOLD);
             panel3.Controls.Add(hindHOLD);
             panel3.Controls.Add(NimiHOLD);
+            resources.ApplyResources(panel3, "panel3");
             panel3.Name = "panel3";
             // 
             // uuendHOLD
             // 
-            resources.ApplyResources(uuendHOLD, "uuendHOLD");
             uuendHOLD.BackColor = Color.LightSlateGray;
+            resources.ApplyResources(uuendHOLD, "uuendHOLD");
             uuendHOLD.Name = "uuendHOLD";
             uuendHOLD.UseVisualStyleBackColor = false;
             uuendHOLD.Click += uuendHOLD_Click;
             // 
             // kustHOLD
             // 
-            resources.ApplyResources(kustHOLD, "kustHOLD");
             kustHOLD.BackColor = Color.Firebrick;
+            resources.ApplyResources(kustHOLD, "kustHOLD");
             kustHOLD.ForeColor = Color.White;
             kustHOLD.Name = "kustHOLD";
             kustHOLD.UseVisualStyleBackColor = false;
@@ -349,8 +349,8 @@
             // 
             // dataGridView4
             // 
-            resources.ApplyResources(dataGridView4, "dataGridView4");
             dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView4, "dataGridView4");
             dataGridView4.Name = "dataGridView4";
             dataGridView4.CellContentClick += dataGridView1_CellContentClick_1;
             // 
@@ -362,26 +362,25 @@
             // 
             // dataGridView3
             // 
-            resources.ApplyResources(dataGridView3, "dataGridView3");
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView3, "dataGridView3");
             dataGridView3.Name = "dataGridView3";
             dataGridView3.CellClick += dataGridView3_CellClick;
             dataGridView3.CellContentClick += dataGridView3_CellContentClick;
             // 
             // tabPage2
             // 
-            resources.ApplyResources(tabPage2, "tabPage2");
             tabPage2.BackColor = SystemColors.GradientInactiveCaption;
             tabPage2.Controls.Add(panel2);
             tabPage2.Controls.Add(label11);
             tabPage2.Controls.Add(dataGridView2);
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(label4);
+            resources.ApplyResources(tabPage2, "tabPage2");
             tabPage2.Name = "tabPage2";
             // 
             // panel2
             // 
-            resources.ApplyResources(panel2, "panel2");
             panel2.BackColor = Color.SlateGray;
             panel2.Controls.Add(UpdateAuto);
             panel2.Controls.Add(textBoxRegNum);
@@ -395,12 +394,13 @@
             panel2.Controls.Add(LisaAuto);
             panel2.Controls.Add(label10);
             panel2.ForeColor = SystemColors.ActiveCaptionText;
+            resources.ApplyResources(panel2, "panel2");
             panel2.Name = "panel2";
             // 
             // UpdateAuto
             // 
-            resources.ApplyResources(UpdateAuto, "UpdateAuto");
             UpdateAuto.BackColor = Color.LightSlateGray;
+            resources.ApplyResources(UpdateAuto, "UpdateAuto");
             UpdateAuto.Name = "UpdateAuto";
             UpdateAuto.UseVisualStyleBackColor = false;
             UpdateAuto.Click += UpdateAuto_Click;
@@ -417,8 +417,8 @@
             // 
             // comboBoxOmanik
             // 
-            resources.ApplyResources(comboBoxOmanik, "comboBoxOmanik");
             comboBoxOmanik.FormattingEnabled = true;
+            resources.ApplyResources(comboBoxOmanik, "comboBoxOmanik");
             comboBoxOmanik.Name = "comboBoxOmanik";
             comboBoxOmanik.SelectedIndexChanged += comboBoxOmanik_SelectedIndexChanged;
             // 
@@ -439,8 +439,8 @@
             // 
             // KustutaAuto
             // 
-            resources.ApplyResources(KustutaAuto, "KustutaAuto");
             KustutaAuto.BackColor = Color.Firebrick;
+            resources.ApplyResources(KustutaAuto, "KustutaAuto");
             KustutaAuto.ForeColor = Color.White;
             KustutaAuto.Name = "KustutaAuto";
             KustutaAuto.UseVisualStyleBackColor = false;
@@ -453,8 +453,8 @@
             // 
             // LisaAuto
             // 
-            resources.ApplyResources(LisaAuto, "LisaAuto");
             LisaAuto.BackColor = Color.LightSteelBlue;
+            resources.ApplyResources(LisaAuto, "LisaAuto");
             LisaAuto.ForeColor = Color.SlateGray;
             LisaAuto.Name = "LisaAuto";
             LisaAuto.UseVisualStyleBackColor = false;
@@ -474,8 +474,8 @@
             // 
             // dataGridView2
             // 
-            resources.ApplyResources(dataGridView2, "dataGridView2");
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView2, "dataGridView2");
             dataGridView2.Name = "dataGridView2";
             dataGridView2.CellClick += dataGridView2_CellClick;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick_1;
@@ -494,7 +494,6 @@
             // 
             // tabPage1
             // 
-            resources.ApplyResources(tabPage1, "tabPage1");
             tabPage1.BackColor = SystemColors.GradientInactiveCaption;
             tabPage1.Controls.Add(label21);
             tabPage1.Controls.Add(label20);
@@ -504,6 +503,7 @@
             tabPage1.Controls.Add(textOTS);
             tabPage1.Controls.Add(label3);
             tabPage1.Controls.Add(dataGridViewOmanik);
+            resources.ApplyResources(tabPage1, "tabPage1");
             tabPage1.Name = "tabPage1";
             // 
             // label21
@@ -522,11 +522,11 @@
             // 
             // panel5
             // 
-            resources.ApplyResources(panel5, "panel5");
             panel5.BackColor = Color.LightSteelBlue;
             panel5.Controls.Add(AutoVali);
             panel5.Controls.Add(listBoxAuto);
             panel5.Controls.Add(label6);
+            resources.ApplyResources(panel5, "panel5");
             panel5.Name = "panel5";
             // 
             // AutoVali
@@ -538,8 +538,8 @@
             // 
             // listBoxAuto
             // 
-            resources.ApplyResources(listBoxAuto, "listBoxAuto");
             listBoxAuto.FormattingEnabled = true;
+            resources.ApplyResources(listBoxAuto, "listBoxAuto");
             listBoxAuto.Name = "listBoxAuto";
             listBoxAuto.SelectedIndexChanged += listBoxAuto_SelectedIndexChanged;
             // 
@@ -558,7 +558,6 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(panel1, "panel1");
             panel1.BackColor = Color.SlateGray;
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textlisa);
@@ -568,12 +567,13 @@
             panel1.Controls.Add(lisaBTN);
             panel1.Controls.Add(nimi);
             panel1.ForeColor = SystemColors.ActiveCaptionText;
+            resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
             // 
             // button1
             // 
-            resources.ApplyResources(button1, "button1");
             button1.BackColor = Color.LightSlateGray;
+            resources.ApplyResources(button1, "button1");
             button1.Name = "button1";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -591,8 +591,8 @@
             // 
             // KustutaBTN
             // 
-            resources.ApplyResources(KustutaBTN, "KustutaBTN");
             KustutaBTN.BackColor = Color.Firebrick;
+            resources.ApplyResources(KustutaBTN, "KustutaBTN");
             KustutaBTN.ForeColor = Color.White;
             KustutaBTN.Name = "KustutaBTN";
             KustutaBTN.UseVisualStyleBackColor = false;
@@ -606,8 +606,8 @@
             // 
             // lisaBTN
             // 
-            resources.ApplyResources(lisaBTN, "lisaBTN");
             lisaBTN.BackColor = Color.LightSteelBlue;
+            resources.ApplyResources(lisaBTN, "lisaBTN");
             lisaBTN.ForeColor = Color.SlateGray;
             lisaBTN.Name = "lisaBTN";
             lisaBTN.UseVisualStyleBackColor = false;
@@ -622,41 +622,43 @@
             // 
             resources.ApplyResources(textOTS, "textOTS");
             textOTS.Name = "textOTS";
+            textOTS.TextChanged += textOTS_TextChanged;
             // 
             // label3
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
+            label3.Click += label3_Click;
             // 
             // dataGridViewOmanik
             // 
-            resources.ApplyResources(dataGridViewOmanik, "dataGridViewOmanik");
             dataGridViewOmanik.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridViewOmanik, "dataGridViewOmanik");
             dataGridViewOmanik.Name = "dataGridViewOmanik";
             dataGridViewOmanik.CellClick += dataGridViewOmanik_CellClick;
             dataGridViewOmanik.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Auto
             // 
-            resources.ApplyResources(Auto, "Auto");
             Auto.Controls.Add(tabPage1);
             Auto.Controls.Add(tabPage2);
             Auto.Controls.Add(autotable);
             Auto.Controls.Add(tabPage3);
             Auto.Controls.Add(tabPage4);
             Auto.Cursor = Cursors.PanSW;
+            resources.ApplyResources(Auto, "Auto");
             Auto.Name = "Auto";
             Auto.SelectedIndex = 0;
             // 
             // tabPage3
             // 
-            resources.ApplyResources(tabPage3, "tabPage3");
             tabPage3.BackColor = SystemColors.GradientInactiveCaption;
             tabPage3.Controls.Add(textBox4);
             tabPage3.Controls.Add(label26);
             tabPage3.Controls.Add(panel6);
             tabPage3.Controls.Add(label17);
             tabPage3.Controls.Add(dataGridView5);
+            resources.ApplyResources(tabPage3, "tabPage3");
             tabPage3.Name = "tabPage3";
             // 
             // textBox4
@@ -671,25 +673,25 @@
             // 
             // panel6
             // 
-            resources.ApplyResources(panel6, "panel6");
             panel6.BackColor = Color.SlateGray;
             panel6.Controls.Add(button2);
             panel6.Controls.Add(button3);
             panel6.Controls.Add(button4);
+            resources.ApplyResources(panel6, "panel6");
             panel6.Name = "panel6";
             // 
             // button2
             // 
-            resources.ApplyResources(button2, "button2");
             button2.BackColor = Color.Azure;
+            resources.ApplyResources(button2, "button2");
             button2.Name = "button2";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click_1;
             // 
             // button3
             // 
-            resources.ApplyResources(button3, "button3");
             button3.BackColor = Color.Firebrick;
+            resources.ApplyResources(button3, "button3");
             button3.Name = "button3";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
@@ -709,13 +711,12 @@
             // 
             // dataGridView5
             // 
-            resources.ApplyResources(dataGridView5, "dataGridView5");
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView5, "dataGridView5");
             dataGridView5.Name = "dataGridView5";
             // 
             // tabPage4
             // 
-            resources.ApplyResources(tabPage4, "tabPage4");
             tabPage4.BackColor = SystemColors.GradientInactiveCaption;
             tabPage4.Controls.Add(panel8);
             tabPage4.Controls.Add(label28);
@@ -723,15 +724,16 @@
             tabPage4.Controls.Add(label27);
             tabPage4.Controls.Add(panel7);
             tabPage4.Controls.Add(dataGridView1);
+            resources.ApplyResources(tabPage4, "tabPage4");
             tabPage4.Name = "tabPage4";
             // 
             // panel8
             // 
-            resources.ApplyResources(panel8, "panel8");
             panel8.Controls.Add(label30);
             panel8.Controls.Add(button5);
             panel8.Controls.Add(label29);
             panel8.Controls.Add(textBox6);
+            resources.ApplyResources(panel8, "panel8");
             panel8.Name = "panel8";
             // 
             // label30
@@ -741,8 +743,8 @@
             // 
             // button5
             // 
-            resources.ApplyResources(button5, "button5");
             button5.BackColor = Color.Azure;
+            resources.ApplyResources(button5, "button5");
             button5.Name = "button5";
             button5.UseVisualStyleBackColor = false;
             // 
@@ -774,16 +776,16 @@
             // 
             // panel7
             // 
-            resources.ApplyResources(panel7, "panel7");
             panel7.BackColor = Color.SlateGray;
             panel7.Controls.Add(button6);
             panel7.Controls.Add(button7);
+            resources.ApplyResources(panel7, "panel7");
             panel7.Name = "panel7";
             // 
             // button6
             // 
-            resources.ApplyResources(button6, "button6");
             button6.BackColor = Color.Firebrick;
+            resources.ApplyResources(button6, "button6");
             button6.Name = "button6";
             button6.UseVisualStyleBackColor = false;
             // 
@@ -795,8 +797,8 @@
             // 
             // dataGridView1
             // 
-            resources.ApplyResources(dataGridView1, "dataGridView1");
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView1, "dataGridView1");
             dataGridView1.Name = "dataGridView1";
             // 
             // Form1
