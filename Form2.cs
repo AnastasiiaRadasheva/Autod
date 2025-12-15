@@ -57,9 +57,24 @@ namespace Autod
             this.Close();
         }
 
+        private void ApplyLanguage()
+        {
+            var res = new ComponentResourceManager(this.GetType());
+            ApplyResourcesToControl(this, res);
+            res.ApplyResources(this, "$this");
+        }
+
+        private void ApplyResourcesToControl(Control ctrl, ComponentResourceManager res)
+        {
+            res.ApplyResources(ctrl, ctrl.Name);
+            foreach (Control child in ctrl.Controls)
+            {
+                ApplyResourcesToControl(child, res);
+            }
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            ApplyLanguage();
         }
     }
 }

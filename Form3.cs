@@ -62,7 +62,7 @@ namespace Autod
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
+            ApplyLanguage();
         }
         private void LaeTeenCombo()
         {
@@ -91,7 +91,7 @@ namespace Autod
                 .ToList();
 
             workCOMBO.DataSource = owners;
-            workCOMBO.DisplayMember = "Name";
+            workCOMBO.DisplayMember = "FullName";
             workCOMBO.ValueMember = "Id";
         }
         private void LaeAutoCombo()
@@ -113,41 +113,50 @@ namespace Autod
         {
 
         }
+
+        private void ApplyLanguage()
+        {
+            var res = new ComponentResourceManager(this.GetType());
+            ApplyResourcesToControl(this, res);
+            res.ApplyResources(this, "$this");
+        }
+
+        private void ApplyResourcesToControl(Control ctrl, ComponentResourceManager res)
+        {
+            res.ApplyResources(ctrl, ctrl.Name);
+            foreach (Control child in ctrl.Controls)
+            {
+                ApplyResourcesToControl(child, res);
+            }
+        }
         private void formkoik_Click(object sender, EventArgs e)
         {
-            if (autoCombo.SelectedItem == null)
+            bool ShowError(string msg)
             {
-                MessageBox.Show("Выберите автомобиль!");
-                return;
+                MessageBox.Show(msg);
+                return false;
             }
+
+            if (autoCombo.SelectedItem == null)
+                if (!ShowError("Vali auto!")) return;
 
             if (serviceCombo.SelectedItem == null)
-            {
-                MessageBox.Show("Выберите услугу!");
-                return;
-            }
+                if (!ShowError("Vali teenus!")) return;
 
             if (workCOMBO.SelectedItem == null)
-            {
-                MessageBox.Show("Выберите работника!");
-                return;
-            }
+                if (!ShowError("Vali töötaja!")) return;
 
-            DateTime date = startPicker.Value.Date;
-            DateTime time = timePicker.Value;
-            DateTime start = date.Add(time.TimeOfDay);
+            DateTime start = startPicker.Value.Date.Add(timePicker.Value.TimeOfDay);
 
             if (start < DateTime.Now)
-            {
-                MessageBox.Show("Нельзя выбрать время в прошлом!");
-                return;
-            }
+                if (!ShowError("Aeg ei saa olla minevikus!")) return;
 
             int duration = (int)durationUpDown.Value;
             DateTime end = start.AddHours(duration);
 
             int workerId = (int)workCOMBO.SelectedValue;
             int carId = (int)autoCombo.SelectedValue;
+
             bool isWorkerBusy = _db.Schedules.Any(s =>
                 s.WorkerId == workerId &&
                 (!_editScheduleId.HasValue || s.Id != _editScheduleId.Value) &&
@@ -157,10 +166,7 @@ namespace Autod
             );
 
             if (isWorkerBusy)
-            {
-                MessageBox.Show("Этот работник уже занят в выбранное время!");
-                return;
-            }
+                if (!ShowError("See töötaja on valitud ajal juba hõivatud!")) return;
 
             bool isCarBusy = _db.Schedules.Any(s =>
                 s.CarId == carId &&
@@ -171,10 +177,7 @@ namespace Autod
             );
 
             if (isCarBusy)
-            {
-                MessageBox.Show("Эта машина уже занята в выбранное время!");
-                return;
-            }
+                if (!ShowError("See auto on valitud ajal juba hõivatud!")) return;
 
             if (_editScheduleId.HasValue)
             {
@@ -188,7 +191,7 @@ namespace Autod
                     schedule.WorkerId = workerId;
 
                     _db.SaveChanges();
-                    MessageBox.Show("Запись обновлена!");
+                    MessageBox.Show("Kirje on uuendatud!");
                     _mainForm.LaeSchedule();
                     this.Close();
                 }
@@ -207,13 +210,16 @@ namespace Autod
                 _db.Schedules.Add(schedule);
                 _db.SaveChanges();
 
-                MessageBox.Show("Запись добавлена!");
+                MessageBox.Show("Kirje on lisatud!");
                 _mainForm.LaeSchedule();
                 this.Close();
             }
         }
 
+        private void workCOMBO_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 
 }

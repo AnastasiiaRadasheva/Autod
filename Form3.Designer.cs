@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -49,41 +50,25 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(34, 21);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(44, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Auto:";
             label1.Click += label1_Click;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(34, 153);
+            resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            label2.Size = new Size(39, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Aeg:";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(34, 71);
+            resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            label3.Size = new Size(68, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Hooldus:";
             label3.Click += label3_Click;
             // 
             // formkoik
             // 
-            formkoik.Location = new Point(322, 349);
-            formkoik.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(formkoik, "formkoik");
             formkoik.Name = "formkoik";
-            formkoik.Size = new Size(86, 31);
-            formkoik.TabIndex = 4;
-            formkoik.Text = "Kõik";
             formkoik.UseVisualStyleBackColor = true;
             formkoik.Click += formkoik_Click;
             // 
@@ -101,115 +86,76 @@
             panel1.Controls.Add(autoCombo);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label3);
-            panel1.Location = new Point(29, 67);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
-            panel1.Size = new Size(379, 275);
-            panel1.TabIndex = 8;
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(34, 192);
+            resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
-            label4.Size = new Size(41, 20);
-            label4.TabIndex = 17;
-            label4.Text = "Tunt:";
             // 
             // Töötaja
             // 
-            Töötaja.AutoSize = true;
-            Töötaja.Location = new Point(34, 235);
+            resources.ApplyResources(Töötaja, "Töötaja");
             Töötaja.Name = "Töötaja";
-            Töötaja.Size = new Size(62, 20);
-            Töötaja.TabIndex = 16;
-            Töötaja.Text = "Töötaja:";
             // 
             // workCOMBO
             // 
             workCOMBO.FormattingEnabled = true;
-            workCOMBO.Location = new Point(98, 231);
-            workCOMBO.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(workCOMBO, "workCOMBO");
             workCOMBO.Name = "workCOMBO";
-            workCOMBO.Size = new Size(239, 28);
-            workCOMBO.TabIndex = 15;
+            workCOMBO.SelectedIndexChanged += workCOMBO_SelectedIndexChanged;
             // 
             // timePicker
             // 
             timePicker.Format = DateTimePickerFormat.Time;
-            timePicker.Location = new Point(98, 153);
-            timePicker.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(timePicker, "timePicker");
             timePicker.Name = "timePicker";
             timePicker.ShowUpDown = true;
-            timePicker.Size = new Size(239, 27);
-            timePicker.TabIndex = 14;
             timePicker.Value = new DateTime(2025, 12, 11, 12, 0, 0, 0);
             // 
             // durationUpDown
             // 
-            durationUpDown.Location = new Point(98, 192);
-            durationUpDown.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(durationUpDown, "durationUpDown");
             durationUpDown.Name = "durationUpDown";
-            durationUpDown.Size = new Size(240, 27);
-            durationUpDown.TabIndex = 13;
             // 
             // startPicker
             // 
             startPicker.Format = DateTimePickerFormat.Short;
-            startPicker.Location = new Point(98, 115);
-            startPicker.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(startPicker, "startPicker");
             startPicker.Name = "startPicker";
-            startPicker.Size = new Size(239, 27);
-            startPicker.TabIndex = 12;
             // 
             // paev
             // 
-            paev.AutoSize = true;
-            paev.Location = new Point(34, 115);
+            resources.ApplyResources(paev, "paev");
             paev.Name = "paev";
-            paev.Size = new Size(39, 20);
-            paev.TabIndex = 8;
-            paev.Text = "Paev";
             // 
             // serviceCombo
             // 
             serviceCombo.FormattingEnabled = true;
-            serviceCombo.Location = new Point(98, 71);
-            serviceCombo.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(serviceCombo, "serviceCombo");
             serviceCombo.Name = "serviceCombo";
-            serviceCombo.Size = new Size(239, 28);
-            serviceCombo.TabIndex = 11;
             // 
             // autoCombo
             // 
             autoCombo.FormattingEnabled = true;
-            autoCombo.Location = new Point(98, 21);
-            autoCombo.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(autoCombo, "autoCombo");
             autoCombo.Name = "autoCombo";
-            autoCombo.Size = new Size(239, 28);
-            autoCombo.TabIndex = 10;
             // 
             // Lisa
             // 
-            Lisa.AutoSize = true;
-            Lisa.Font = new Font("Snap ITC", 18F, FontStyle.Bold);
-            Lisa.Location = new Point(178, 21);
+            resources.ApplyResources(Lisa, "Lisa");
             Lisa.Name = "Lisa";
-            Lisa.Size = new Size(94, 39);
-            Lisa.TabIndex = 9;
-            Lisa.Text = "Lisa";
             // 
             // Form3
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ScrollBar;
-            ClientSize = new Size(441, 428);
             Controls.Add(Lisa);
             Controls.Add(panel1);
             Controls.Add(formkoik);
             Name = "Form3";
-            Text = "Lisa ";
             Load += Form3_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

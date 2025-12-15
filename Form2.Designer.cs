@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             label1 = new Label();
             checkedListBoxAutod = new CheckedListBox();
             koikBTN = new Button();
@@ -35,45 +36,30 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Colonna MT", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(93, 13);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(202, 28);
-            label1.TabIndex = 0;
-            label1.Text = "Vali teie autod!";
             // 
             // checkedListBoxAutod
             // 
+            resources.ApplyResources(checkedListBoxAutod, "checkedListBoxAutod");
             checkedListBoxAutod.FormattingEnabled = true;
-            checkedListBoxAutod.Location = new Point(24, 45);
-            checkedListBoxAutod.Margin = new Padding(3, 4, 3, 4);
             checkedListBoxAutod.Name = "checkedListBoxAutod";
-            checkedListBoxAutod.Size = new Size(337, 488);
-            checkedListBoxAutod.TabIndex = 1;
             // 
             // koikBTN
             // 
-            koikBTN.Location = new Point(275, 559);
-            koikBTN.Margin = new Padding(3, 4, 3, 4);
+            resources.ApplyResources(koikBTN, "koikBTN");
             koikBTN.Name = "koikBTN";
-            koikBTN.Size = new Size(86, 31);
-            koikBTN.TabIndex = 2;
-            koikBTN.Text = "Kõik";
             koikBTN.UseVisualStyleBackColor = true;
             koikBTN.Click += button1_Click;
             // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(387, 605);
             Controls.Add(koikBTN);
             Controls.Add(checkedListBoxAutod);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
-            Text = "Form2";
             Load += Form2_Load;
             ResumeLayout(false);
             PerformLayout();
