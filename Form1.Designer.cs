@@ -114,8 +114,6 @@
             label29 = new Label();
             textBox6 = new TextBox();
             label28 = new Label();
-            textBox5 = new TextBox();
-            label27 = new Label();
             panel7 = new Panel();
             button6 = new Button();
             button7 = new Button();
@@ -171,7 +169,7 @@
             // 
             resources.ApplyResources(textBox3, "textBox3");
             textBox3.Name = "textBox3";
-            textBox3.TextChanged += textBox3_TextChanged;
+            textBox3.TextChanged += textBox3_TextChanged_1;
             // 
             // label25
             // 
@@ -182,6 +180,7 @@
             // 
             resources.ApplyResources(textBox1, "textBox1");
             textBox1.Name = "textBox1";
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label22
             // 
@@ -665,6 +664,7 @@
             // 
             resources.ApplyResources(textBox4, "textBox4");
             textBox4.Name = "textBox4";
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // label26
             // 
@@ -720,8 +720,6 @@
             tabPage4.BackColor = SystemColors.GradientInactiveCaption;
             tabPage4.Controls.Add(panel8);
             tabPage4.Controls.Add(label28);
-            tabPage4.Controls.Add(textBox5);
-            tabPage4.Controls.Add(label27);
             tabPage4.Controls.Add(panel7);
             tabPage4.Controls.Add(dataGridView1);
             resources.ApplyResources(tabPage4, "tabPage4");
@@ -763,16 +761,6 @@
             resources.ApplyResources(label28, "label28");
             label28.ForeColor = Color.LightSlateGray;
             label28.Name = "label28";
-            // 
-            // textBox5
-            // 
-            resources.ApplyResources(textBox5, "textBox5");
-            textBox5.Name = "textBox5";
-            // 
-            // label27
-            // 
-            resources.ApplyResources(label27, "label27");
-            label27.Name = "label27";
             // 
             // panel7
             // 
@@ -933,8 +921,6 @@
         private Button button6;
         private Button button7;
         private Label label28;
-        private TextBox textBox5;
-        private Label label27;
         private DataGridView dataGridView1;
     }
 }

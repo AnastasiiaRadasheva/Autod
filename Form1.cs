@@ -406,7 +406,40 @@ namespace Autod
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                string q = textBox2.Text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(q))
+                {
+                    LaeAutod();
+                    return;
+                }
 
+                var cars = _db.Cars
+                    .Include(c => c.Owner)
+                    .Include(c => c.CarServices)
+                    .Where(c =>
+                        c.Brand.ToLower().Contains(q) ||
+                        c.Model.ToLower().Contains(q) ||
+                        c.RegistrationNumber.ToLower().Contains(q) ||
+                        (c.Owner != null && c.Owner.FullName.ToLower().Contains(q)))
+                    .Select(c => new
+                    {
+                        c.Id,
+                        c.Brand,
+                        c.Model,
+                        c.RegistrationNumber,
+                        OwnerName = c.Owner.FullName,
+                        Services = c.CarServices.Count
+                    })
+                    .ToList();
+
+                dataGridView2.DataSource = cars;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga otsimisel: " + ex.Message);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -986,7 +1019,140 @@ namespace Autod
 
         private void textOTS_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                string q = textOTS.Text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(q))
+                {
+                    LaeOmanikud();
+                    return;
+                }
 
+                var data = _db.Owners
+                    .Include(o => o.Cars)
+                    .Where(o => o.FullName.ToLower().Contains(q))
+                    .Select(o => new
+                    {
+                        o.Id,
+                        o.FullName,
+                        o.Phone,
+                        CarCount = o.Cars.Count
+                    })
+                    .ToList();
+
+                dataGridViewOmanik.DataSource = data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga otsimisel: " + ex.Message);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string q = textBox1.Text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(q))
+                {
+                    LaeService();
+                    return;
+                }
+
+                var services = _db.Services
+                    .Where(s => s.Name.ToLower().Contains(q))
+                    .Select(s => new { s.Id, s.Name, s.Price })
+                    .ToList();
+
+                dataGridView3.DataSource = services;
+                if (dataGridView3.Columns["Id"] != null)
+                    dataGridView3.Columns["Id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga otsimisel: " + ex.Message);
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string q = textBox4.Text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(q))
+                {
+                    LaeSchedule();
+                    return;
+                }
+
+                // Try parse date first (so user can type a date)
+                bool isDate = DateTime.TryParse(q, out DateTime parsedDate);
+
+                var data = _db.Schedules
+                    .Include(s => s.Car)
+                    .Include(s => s.Service)
+                    .Include(s => s.Worker)
+                    .Where(s =>
+                        (s.Worker != null && s.Worker.FullName.ToLower().Contains(q)) ||
+                        (s.Service != null && s.Service.Name.ToLower().Contains(q)) ||
+                        (s.Car != null && (s.Car.Brand.ToLower().Contains(q) || s.Car.RegistrationNumber.ToLower().Contains(q))) ||
+                        (isDate && s.StartTime.Date == parsedDate.Date))
+                    .Select(s => new
+                    {
+                        s.Id,
+                        s.StartTime,
+                        s.EndTime,
+                        Worker = s.Worker.FullName,
+                        Service = s.Service.Name,
+                        CarBrand = s.Car.Brand,
+                        CarRegNum = s.Car.RegistrationNumber
+                    })
+                    .ToList();
+
+                dataGridView5.DataSource = data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga otsimisel: " + ex.Message);
+            }
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                string q = textBox3.Text.Trim().ToLowerInvariant();
+                if (string.IsNullOrEmpty(q))
+                {
+                    LaeCarService();
+                    return;
+                }
+
+                var list = _db.CarServices
+                    .Include(cs => cs.Car)
+                    .Include(cs => cs.Service)
+                    .Where(cs =>
+                        (cs.Car != null && (cs.Car.Brand.ToLower().Contains(q) || cs.Car.Model.ToLower().Contains(q) || cs.Car.RegistrationNumber.ToLower().Contains(q))) ||
+                        (cs.Service != null && cs.Service.Name.ToLower().Contains(q)) ||
+                        cs.Mileage.ToString().Contains(q) 
+                     
+                    )
+                    .Select(cs => new
+                    {
+                        Auto = cs.Car.Brand + " " + cs.Car.Model + " (" + cs.Car.RegistrationNumber + ")",
+                        Service = cs.Service.Name,
+                        Price = cs.Service.Price,
+                        Date = cs.DateOfService.ToShortDateString(),
+                        Mileage = cs.Mileage
+                    })
+                    .ToList();
+
+                dataGridView4.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Viga otsimisel: " + ex.Message);
+            }
         }
 
 
