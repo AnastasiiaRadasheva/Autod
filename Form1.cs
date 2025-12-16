@@ -148,6 +148,19 @@ namespace Autod
                     return;
                 }
 
+                if (string.IsNullOrWhiteSpace(telefon))
+                {
+                    MessageBox.Show("Palun sisestage telefoninumber.");
+                    return;
+                }
+
+                var phoneExists = _db.Owners.Any(o => o.Phone == telefon);
+                if (phoneExists)
+                {
+                    MessageBox.Show("Selline telefoninumber on juba olemas!");
+                    return;
+                }
+
                 var uusOmanik = new Owner
                 {
                     FullName = nimi,
@@ -158,6 +171,7 @@ namespace Autod
                 _db.SaveChanges();
 
                 LaeOmanikud();
+                LaeOmanikudCombo();
 
                 textlisa.Clear();
                 texttelefon.Clear();
@@ -314,7 +328,6 @@ namespace Autod
                     LaeOmanikud();
                     LaeAutod();
 
-                    // Обновляем список автомобилей в listBoxAuto
                     LaeListBoxAuto(ownerId);
 
 
@@ -481,13 +494,28 @@ namespace Autod
                 return;
             }
 
+            string regNum = textBoxRegNum.Text.Trim();
+            if (string.IsNullOrEmpty(regNum))
+            {
+                MessageBox.Show("Palun sisesta korrektne registreerimisnumber.");
+                return;
+            }
+            
+            string regNormalized = regNum.ToUpperInvariant();
+            bool exists = _db.Cars.Any(c => c.RegistrationNumber.ToUpper() == regNormalized);
+            if (exists)
+            {
+                MessageBox.Show("Sellise registreerimisnumbriga auto juba olemas.");
+                return;
+            }
+
             int ownerId = (int)comboBoxOmanik.SelectedValue;
 
             var car = new Car
             {
-                Brand = textBoxMARK.Text,
-                Model = textBoxMODEL.Text,
-                RegistrationNumber = textBoxRegNum.Text,
+                Brand = textBoxMARK.Text.Trim(),
+                Model = textBoxMODEL.Text.Trim(),
+                RegistrationNumber = regNum,
                 OwnerId = ownerId
             };
 
@@ -542,9 +570,24 @@ namespace Autod
                 return;
             }
 
-            car.Brand = textBoxMARK.Text;
-            car.Model = textBoxMODEL.Text;
-            car.RegistrationNumber = textBoxRegNum.Text;
+            string newReg = textBoxRegNum.Text.Trim();
+            if (string.IsNullOrEmpty(newReg))
+            {
+                MessageBox.Show("Palun sisesta korrektne registreerimisnumber.");
+                return;
+            }
+
+            string regNormalized = newReg.ToUpperInvariant();
+            bool exists = _db.Cars.Any(c => c.Id != id && c.RegistrationNumber.ToUpper() == regNormalized);
+            if (exists)
+            {
+                MessageBox.Show("Sellise registreerimisnumbriga auto juba olemas.");
+                return;
+            }
+
+            car.Brand = textBoxMARK.Text.Trim();
+            car.Model = textBoxMODEL.Text.Trim();
+            car.RegistrationNumber = newReg;
             car.OwnerId = (int)comboBoxOmanik.SelectedValue;
 
             _db.SaveChanges();
@@ -1261,6 +1304,11 @@ namespace Autod
             LaeService();
             LaeCarService();
             LaeOmanikudCombo(); LaeHooldusCombo();
+        }
+
+        private void textBoxRegNum_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 

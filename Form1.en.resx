@@ -126,10 +126,6 @@
   <data name="label5.Text" xml:space="preserve">
     <value>New Services</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="&gt;&gt;uuendTEEN.Type" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="label24.Text" xml:space="preserve">
     <value>Mileage:</value>
   </data>
@@ -138,6 +134,10 @@
   </data>
   <data name="uuendTEEN.Text" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="&gt;&gt;uuendTEEN.Type" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="kustTEEN.Text" xml:space="preserve">
     <value>Delete</value>
@@ -178,8 +178,8 @@
   <data name="label12.Text" xml:space="preserve">
     <value>Maintenance </value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Cars</value>
+  <data name="autotable.Text" xml:space="preserve">
+    <value>Maintenance and Services</value>
   </data>
   <data name="UpdateAuto.Text" xml:space="preserve">
     <value>Update</value>
@@ -211,8 +211,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Search car:</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Owner</value>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Cars</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>*The owner must be selected from the table.</value>
@@ -247,8 +247,8 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Search owner:</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Schedules</value>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>Search schedules:</value>
@@ -274,8 +274,8 @@
   <data name="label17.Text" xml:space="preserve">
     <value>Schedules</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Workers</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Schedules</value>
   </data>
   <data name="label30.Text" xml:space="preserve">
     <value>New worker</value>
@@ -297,6 +297,9 @@
   </data>
   <data name="button7.Text" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>Workers</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value> </value>

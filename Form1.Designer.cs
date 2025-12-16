@@ -408,6 +408,7 @@
             // 
             resources.ApplyResources(textBoxRegNum, "textBoxRegNum");
             textBoxRegNum.Name = "textBoxRegNum";
+            textBoxRegNum.TextChanged += textBoxRegNum_TextChanged;
             // 
             // label19
             // 
