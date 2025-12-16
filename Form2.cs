@@ -14,9 +14,13 @@ namespace Autod
     public partial class Form2 : Form
     {
         private readonly AutoDbContext _db;
-        public Form2(AutoDbContext db)
+        public Form2()
         {
             InitializeComponent();
+        }
+
+        public Form2(AutoDbContext db) : this()
+        {
             _db = db;
             PopulateCheckedListBox();
         }

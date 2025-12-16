@@ -23,7 +23,7 @@ namespace Autod
             LaeService();
             LaeCarService();
             LaeOmanikudCombo(); LaeHooldusCombo(); LaeAutoCombo(); LaeSchedule();
-
+            LaeWorker();
         }
         public void LaeSchedule()
         {
@@ -62,6 +62,19 @@ namespace Autod
                 .ToList();
 
             dataGridViewOmanik.DataSource = data;
+        }
+
+        private void LaeWorker()
+        {
+            var data = _db.Workers
+                .Select(o => new
+                {
+                    o.Id,
+                    o.FullName
+                })
+                .ToList();
+
+            dataGridView11.DataSource = data;
         }
 
 
@@ -1134,8 +1147,8 @@ namespace Autod
                     .Where(cs =>
                         (cs.Car != null && (cs.Car.Brand.ToLower().Contains(q) || cs.Car.Model.ToLower().Contains(q) || cs.Car.RegistrationNumber.ToLower().Contains(q))) ||
                         (cs.Service != null && cs.Service.Name.ToLower().Contains(q)) ||
-                        cs.Mileage.ToString().Contains(q) 
-                     
+                        cs.Mileage.ToString().Contains(q)
+
                     )
                     .Select(cs => new
                     {
@@ -1153,6 +1166,27 @@ namespace Autod
             {
                 MessageBox.Show("Viga otsimisel: " + ex.Message);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(textBox6.Text))
+            {
+                MessageBox.Show("Palun sisesta hoolduse nimi.");
+                return;
+            }
+        
+            var workers = new Worker
+            {
+                FullName = textBox6.Text,
+            };
+
+            _db.Workers.Add(workers);
+            _db.SaveChanges();
+            LaeWorker(); LaeSchedule();
+
+            MessageBox.Show("Hooldus edukalt lisatud!");
         }
 
 

@@ -117,7 +117,7 @@
             panel7 = new Panel();
             button6 = new Button();
             button7 = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridView11 = new DataGridView();
             autotable.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -137,7 +137,7 @@
             tabPage4.SuspendLayout();
             panel8.SuspendLayout();
             panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView11).BeginInit();
             SuspendLayout();
             // 
             // comboBox1
@@ -721,7 +721,7 @@
             tabPage4.Controls.Add(panel8);
             tabPage4.Controls.Add(label28);
             tabPage4.Controls.Add(panel7);
-            tabPage4.Controls.Add(dataGridView1);
+            tabPage4.Controls.Add(dataGridView11);
             resources.ApplyResources(tabPage4, "tabPage4");
             tabPage4.Name = "tabPage4";
             // 
@@ -745,6 +745,7 @@
             resources.ApplyResources(button5, "button5");
             button5.Name = "button5";
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // label29
             // 
@@ -783,11 +784,11 @@
             button7.Name = "button7";
             button7.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridView11
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(dataGridView1, "dataGridView1");
-            dataGridView1.Name = "dataGridView1";
+            dataGridView11.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(dataGridView11, "dataGridView11");
+            dataGridView11.Name = "dataGridView11";
             // 
             // Form1
             // 
@@ -828,7 +829,7 @@
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
             panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView11).EndInit();
             ResumeLayout(false);
         }
 
@@ -921,6 +922,6 @@
         private Button button6;
         private Button button7;
         private Label label28;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView11;
     }
 }
