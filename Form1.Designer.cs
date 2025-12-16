@@ -777,12 +777,14 @@
             resources.ApplyResources(button6, "button6");
             button6.Name = "button6";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
             resources.ApplyResources(button7, "button7");
             button7.Name = "button7";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // dataGridView11
             // 

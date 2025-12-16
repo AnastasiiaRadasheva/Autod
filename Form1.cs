@@ -502,7 +502,15 @@ namespace Autod
 
             MessageBox.Show("Auto lisatud!");
         }
+        private int GetSelectedWorkerId()
+        {
+            if (dataGridView11.CurrentRow == null)
+                throw new Exception("Palun vali töötaja tabelist.");
 
+            var obj = dataGridView11.CurrentRow.DataBoundItem;
+            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
+            return id;
+        }
         private void UpdateAuto_Click(object sender, EventArgs e)
         {
             if (dataGridView2.SelectedRows.Count == 0)
@@ -1176,7 +1184,7 @@ namespace Autod
                 MessageBox.Show("Palun sisesta hoolduse nimi.");
                 return;
             }
-        
+
             var workers = new Worker
             {
                 FullName = textBox6.Text,
@@ -1187,6 +1195,72 @@ namespace Autod
             LaeWorker(); LaeSchedule();
 
             MessageBox.Show("Hooldus edukalt lisatud!");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = GetSelectedWorkerId();
+
+                var service = _db.Workers.FirstOrDefault(s => s.Id == id);
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(textBox6.Text))
+                {
+                    MessageBox.Show("Palun sisesta hoolduse nimi.");
+                    return;
+                }
+
+                service.FullName = textBox6.Text;
+
+
+                _db.SaveChanges();
+                LaeWorker();
+                MessageBox.Show("Tootaja edukalt uuendatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = GetSelectedWorkerId();
+
+                var service = _db.Workers
+                    .FirstOrDefault(s => s.Id == id);
+
+                if (service == null)
+                {
+                    MessageBox.Show("Hooldust ei leitud.");
+                    return;
+                }
+                _db.Workers.Remove(service);
+                _db.SaveChanges();
+                LaeWorker();
+                MessageBox.Show("Hooldus kustutatud!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LaeOmanikud();
+            LaeAutod();
+            LaeService();
+            LaeCarService();
+            LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
 
