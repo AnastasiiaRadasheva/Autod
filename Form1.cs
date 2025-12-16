@@ -1085,16 +1085,18 @@ namespace Autod
         {
             try
             {
-                string q = textOTS.Text.Trim().ToLowerInvariant();
+                string q = textOTS.Text.Trim();
                 if (string.IsNullOrEmpty(q))
                 {
                     LaeOmanikud();
                     return;
                 }
 
+                string pattern = $"%{q}%";
+
                 var data = _db.Owners
                     .Include(o => o.Cars)
-                    .Where(o => o.FullName.ToLower().Contains(q))
+                    .Where(o => EF.Functions.Like(o.FullName, pattern) || EF.Functions.Like(o.Phone, pattern))
                     .Select(o => new
                     {
                         o.Id,
@@ -1111,7 +1113,6 @@ namespace Autod
                 MessageBox.Show("Viga otsimisel: " + ex.Message);
             }
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             try
