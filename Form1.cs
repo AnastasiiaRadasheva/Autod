@@ -63,7 +63,6 @@ namespace Autod
 
             dataGridViewOmanik.DataSource = data;
         }
-
         private void LaeWorker()
         {
             var data = _db.Workers
@@ -76,8 +75,118 @@ namespace Autod
 
             dataGridView11.DataSource = data;
         }
+        private void LaeOmanikudCombo()
+        {
+            var owners = _db.Owners
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.FullName
+                })
+                .ToList();
+
+            comboBoxOmanik.DataSource = owners;
+            comboBoxOmanik.DisplayMember = "FullName";
+            comboBoxOmanik.ValueMember = "Id";
+        }
+        private void LaeAutoCombo()
+        {
+            var auto = _db.Cars
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.RegistrationNumber
+                })
+                .ToList();
+
+            teenAUTO.DataSource = auto;
+            teenAUTO.DisplayMember = "RegistrationNumber";
+            teenAUTO.ValueMember = "Id";
+        }
+        private void LaeHooldusCombo()
+        {
+            var owners = _db.Services
+
+                .Select(o => new
+                {
+                    o.Id,
+                    o.Name
+                })
+                .ToList();
+
+            teenHOOLD.DataSource = owners;
+            teenHOOLD.DisplayMember = "Name";
+            teenHOOLD.ValueMember = "Id";
+        }
+        private void LaeService()
+        {
+            var services = _db.Services
+                .Select(s => new
+                {
+                    s.Id,
+                    s.Name,
+                    s.Price
+                })
+                .ToList();
+
+            dataGridView3.DataSource = services;
+            if (dataGridView3.Columns["Id"] != null)
+                dataGridView3.Columns["Id"].Visible = false;
+        }
+        private void LaeCarService()
+        {
+            var carServices = _db.CarServices
+                .Include(cs => cs.Car)
+                .Include(cs => cs.Service)
+                .ToList();
+
+            var list = carServices.Select(cs => new
+            {
+                Auto = $"{cs.Car.Brand} {cs.Car.Model} ({cs.Car.RegistrationNumber})",
+                Service = cs.Service.Name,
+                Price = cs.Service.Price,
+                Date = cs.DateOfService.ToShortDateString(),
+                Mileage = cs.Mileage
+            }).ToList();
+
+            dataGridView4.DataSource = list;
+        }
+        private void LaeAutod()
+        {
+            var cars = _db.Cars
+                .Include(c => c.Owner)
+                .Include(c => c.CarServices)
+                .ThenInclude(cs => cs.Service)
+                .ToList();
+
+            var carList = cars.Select(c => new
+            {
+                c.Id,
+                c.Brand,
+                c.Model,
+                c.RegistrationNumber,
+                OwnerName = c.Owner.FullName,
+
+                Services = c.CarServices?.Count ?? 0
+
+            })
+            .ToList();
+
+            dataGridView2.DataSource = carList;
+        }
 
 
+        private int GetSelectedServiceId()
+        {
+            if (dataGridView3.CurrentRow == null)
+                throw new Exception("Palun vali hooldus tabelist.");
+            var obj = dataGridView3.CurrentRow.DataBoundItem;
+            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
+
+            return id;
+        }
         private void KustutaBTN_Click(object sender, EventArgs e)
         {
             try
@@ -199,86 +308,10 @@ namespace Autod
 
         }
 
-
-
-
         private void comboBoxAuto_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void LaeService()
-        {
-            var services = _db.Services
-                .Select(s => new
-                {
-                    s.Id,
-                    s.Name,
-                    s.Price
-                })
-                .ToList();
-
-            dataGridView3.DataSource = services;
-            if (dataGridView3.Columns["Id"] != null)
-                dataGridView3.Columns["Id"].Visible = false;
-        }
-
-        private int GetSelectedServiceId()
-        {
-            if (dataGridView3.CurrentRow == null)
-                throw new Exception("Palun vali hooldus tabelist.");
-            var obj = dataGridView3.CurrentRow.DataBoundItem;
-            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
-
-            return id;
-        }
-
-
-
-        private void LaeCarService()
-        {
-            var carServices = _db.CarServices
-                .Include(cs => cs.Car)
-                .Include(cs => cs.Service)
-                .ToList();
-
-            var list = carServices.Select(cs => new
-            {
-                Auto = $"{cs.Car.Brand} {cs.Car.Model} ({cs.Car.RegistrationNumber})",
-                Service = cs.Service.Name,
-                Price = cs.Service.Price,
-                Date = cs.DateOfService.ToShortDateString(),
-                Mileage = cs.Mileage
-            }).ToList();
-
-            dataGridView4.DataSource = list;
-        }
-
-
-        private void LaeAutod()
-        {
-            var cars = _db.Cars
-                .Include(c => c.Owner)
-                .Include(c => c.CarServices)
-                .ThenInclude(cs => cs.Service)
-                .ToList();
-
-            var carList = cars.Select(c => new
-            {
-                c.Id,
-                c.Brand,
-                c.Model,
-                c.RegistrationNumber,
-                OwnerName = c.Owner.FullName,
-
-                Services = c.CarServices?.Count ?? 0
-
-            })
-            .ToList();
-
-            dataGridView2.DataSource = carList;
-        }
-
 
 
 
@@ -382,52 +415,6 @@ namespace Autod
         private void comboBoxOmanik_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-        private void LaeOmanikudCombo()
-        {
-            var owners = _db.Owners
-
-                .Select(o => new
-                {
-                    o.Id,
-                    o.FullName
-                })
-                .ToList();
-
-            comboBoxOmanik.DataSource = owners;
-            comboBoxOmanik.DisplayMember = "FullName";
-            comboBoxOmanik.ValueMember = "Id";
-        }
-
-        private void LaeAutoCombo()
-        {
-            var auto = _db.Cars
-
-                .Select(o => new
-                {
-                    o.Id,
-                    o.RegistrationNumber
-                })
-                .ToList();
-
-            teenAUTO.DataSource = auto;
-            teenAUTO.DisplayMember = "RegistrationNumber";
-            teenAUTO.ValueMember = "Id";
-        }
-        private void LaeHooldusCombo()
-        {
-            var owners = _db.Services
-
-                .Select(o => new
-                {
-                    o.Id,
-                    o.Name
-                })
-                .ToList();
-
-            teenHOOLD.DataSource = owners;
-            teenHOOLD.DisplayMember = "Name";
-            teenHOOLD.ValueMember = "Id";
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -721,7 +708,6 @@ namespace Autod
             LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
-
         private void kustHOLD_Click(object sender, EventArgs e)
         {
             try
@@ -757,7 +743,6 @@ namespace Autod
             LaeCarService();
             LaeOmanikudCombo(); LaeHooldusCombo();
         }
-
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -934,19 +919,6 @@ namespace Autod
             LaeOmanikudCombo(); LaeHooldusCombo();
         }
 
-
-        private int GetSelectedCarServiceId()
-        {
-            if (dataGridView4.CurrentRow == null)
-                throw new Exception("Palun vali teenindus tabelist.");
-
-            var obj = dataGridView4.CurrentRow.DataBoundItem;
-
-
-            int id = (int)obj.GetType().GetProperty("Id").GetValue(obj);
-            return id;
-        }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             var form = new Form3(this, _db);
@@ -963,12 +935,12 @@ namespace Autod
         {
             if (dataGridView5.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Пожалуйста, выберите запись из расписания.");
+                MessageBox.Show("Palun vali tabelisse.");
                 return;
             }
 
             int scheduleId = (int)dataGridView5.SelectedRows[0].Cells["Id"].Value;
-            var form = new Form3(this, _db, scheduleId); // Передаем Id
+            var form = new Form3(this, _db, scheduleId); 
             form.Show();
         }
 
@@ -976,7 +948,7 @@ namespace Autod
         {
             if (dataGridView5.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Пожалуйста, выберите запись из расписания.");
+                MessageBox.Show("Palun valige ajakavast sobiv aeg.");
                 return;
             }
 
@@ -986,7 +958,7 @@ namespace Autod
 
             if (schedule == null)
             {
-                MessageBox.Show("Запись не найдена.");
+                MessageBox.Show("Kirjet ei leitud.");
                 return;
             }
 
@@ -994,7 +966,7 @@ namespace Autod
             _db.SaveChanges();
 
             LaeSchedule();
-            MessageBox.Show("Запись успешно удалена!");
+            MessageBox.Show("Kirje on edukalt kustutatud!");
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -1006,6 +978,7 @@ namespace Autod
         {
 
         }
+
         bool _keelLaetud = false;
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -1033,15 +1006,12 @@ namespace Autod
 
         private void ChangeLanguage(string lang)
         {
-            // Salvesta valik
             Properties.Settings.Default.UserLanguage = lang;
             Properties.Settings.Default.Save();
 
-            // Muuda kultuur
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
 
-            // Rakenda ressursid uuesti (sina juba kasutad seda meetodit)
             var res = new ComponentResourceManager(typeof(Form1));
             ApplyResourcesToControl(this, res);
             res.ApplyResources(this, "$this");
@@ -1058,9 +1028,6 @@ namespace Autod
 
 
         }
-
-
-
 
         private void ApplyResourcesToControl(Control ctrl, ComponentResourceManager res)
         {
@@ -1085,18 +1052,16 @@ namespace Autod
         {
             try
             {
-                string q = textOTS.Text.Trim();
+                string q = textOTS.Text.Trim().ToLowerInvariant();
                 if (string.IsNullOrEmpty(q))
                 {
                     LaeOmanikud();
                     return;
                 }
 
-                string pattern = $"%{q}%";
-
                 var data = _db.Owners
                     .Include(o => o.Cars)
-                    .Where(o => EF.Functions.Like(o.FullName, pattern) || EF.Functions.Like(o.Phone, pattern))
+                    .Where(o => o.FullName.ToLower().Contains(q) || o.Phone.ToLower().Contains(q))
                     .Select(o => new
                     {
                         o.Id,
@@ -1107,6 +1072,9 @@ namespace Autod
                     .ToList();
 
                 dataGridViewOmanik.DataSource = data;
+
+                if (dataGridViewOmanik.Columns["Id"] != null)
+                    dataGridViewOmanik.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -1150,7 +1118,6 @@ namespace Autod
                     return;
                 }
 
-                // Try parse date first (so user can type a date)
                 bool isDate = DateTime.TryParse(q, out DateTime parsedDate);
 
                 var data = _db.Schedules

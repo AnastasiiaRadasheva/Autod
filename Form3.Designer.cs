@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
             formkoik = new Button();
             panel1 = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             label4 = new Label();
             Töötaja = new Label();
             workCOMBO = new ComboBox();
@@ -48,32 +48,18 @@
             ((System.ComponentModel.ISupportInitialize)durationUpDown).BeginInit();
             SuspendLayout();
             // 
-            // label1
-            // 
-            resources.ApplyResources(label1, "label1");
-            label1.Name = "label1";
-            label1.Click += label1_Click;
-            // 
-            // label2
-            // 
-            resources.ApplyResources(label2, "label2");
-            label2.Name = "label2";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(label3, "label3");
-            label3.Name = "label3";
-            label3.Click += label3_Click;
-            // 
             // formkoik
             // 
             resources.ApplyResources(formkoik, "formkoik");
             formkoik.Name = "formkoik";
-            formkoik.UseVisualStyleBackColor = true;
             formkoik.Click += formkoik_Click;
             // 
             // panel1
             // 
+            resources.ApplyResources(panel1, "panel1");
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(Töötaja);
             panel1.Controls.Add(workCOMBO);
@@ -82,12 +68,23 @@
             panel1.Controls.Add(startPicker);
             panel1.Controls.Add(paev);
             panel1.Controls.Add(serviceCombo);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(autoCombo);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label3);
-            resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(label3, "label3");
+            label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(label2, "label2");
+            label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.Name = "label1";
             // 
             // label4
             // 
@@ -101,15 +98,13 @@
             // 
             // workCOMBO
             // 
-            workCOMBO.FormattingEnabled = true;
             resources.ApplyResources(workCOMBO, "workCOMBO");
             workCOMBO.Name = "workCOMBO";
-            workCOMBO.SelectedIndexChanged += workCOMBO_SelectedIndexChanged;
             // 
             // timePicker
             // 
-            timePicker.Format = DateTimePickerFormat.Time;
             resources.ApplyResources(timePicker, "timePicker");
+            timePicker.Format = DateTimePickerFormat.Time;
             timePicker.Name = "timePicker";
             timePicker.ShowUpDown = true;
             timePicker.Value = new DateTime(2025, 12, 11, 12, 0, 0, 0);
@@ -121,8 +116,8 @@
             // 
             // startPicker
             // 
-            startPicker.Format = DateTimePickerFormat.Short;
             resources.ApplyResources(startPicker, "startPicker");
+            startPicker.Format = DateTimePickerFormat.Short;
             startPicker.Name = "startPicker";
             // 
             // paev
@@ -132,14 +127,14 @@
             // 
             // serviceCombo
             // 
-            serviceCombo.FormattingEnabled = true;
             resources.ApplyResources(serviceCombo, "serviceCombo");
+            serviceCombo.FormattingEnabled = true;
             serviceCombo.Name = "serviceCombo";
             // 
             // autoCombo
             // 
-            autoCombo.FormattingEnabled = true;
             resources.ApplyResources(autoCombo, "autoCombo");
+            autoCombo.FormattingEnabled = true;
             autoCombo.Name = "autoCombo";
             // 
             // Lisa
@@ -156,7 +151,6 @@
             Controls.Add(panel1);
             Controls.Add(formkoik);
             Name = "Form3";
-            Load += Form3_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)durationUpDown).EndInit();
@@ -165,10 +159,6 @@
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
-        private Label label3;
         private Button formkoik;
         private Panel panel1;
         private Label Lisa;
@@ -181,5 +171,8 @@
         private Label label4;
         private Label Töötaja;
         private ComboBox workCOMBO;
+        private Label label3;
+        private Label label2;
+        private Label label1;
     }
 }

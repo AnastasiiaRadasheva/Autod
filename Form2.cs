@@ -24,20 +24,25 @@ namespace Autod
             _db = db;
             PopulateCheckedListBox();
         }
+        private class CarListItem
+        {
+            public int Id { get; set; }
+            public string DisplayText { get; set; }
+        }
+
         private void PopulateCheckedListBox()
         {
             var cars = _db.Cars
-                .Select(c => new
+                .Select(c => new CarListItem
                 {
-                    c.Id,
+                    Id = c.Id,
                     DisplayText = $"{c.Brand}/{c.RegistrationNumber}"
                 })
                 .ToList();
-            checkedListBoxAutod.Items.Clear();
-            foreach (var car in cars)
-            {
-                checkedListBoxAutod.Items.Add(new { car.Id, car.DisplayText });
-            }
+
+            checkedListBoxAutod.DataSource = cars;
+            checkedListBoxAutod.DisplayMember = nameof(CarListItem.DisplayText);
+            checkedListBoxAutod.ValueMember = nameof(CarListItem.Id);
         }
         public List<string> GetSelectedCars()
         {
@@ -61,12 +66,6 @@ namespace Autod
             this.Close();
         }
 
-        private void ApplyLanguage()
-        {
-            var res = new ComponentResourceManager(this.GetType());
-            ApplyResourcesToControl(this, res);
-            res.ApplyResources(this, "$this");
-        }
 
         private void ApplyResourcesToControl(Control ctrl, ComponentResourceManager res)
         {
@@ -78,7 +77,7 @@ namespace Autod
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            ApplyLanguage();
+       
         }
     }
 }
